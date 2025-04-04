@@ -1,6 +1,6 @@
 #include "settings.h"
-#include "secrets.h"  // Ensure secrets.h defines DEFAULT_* constants
-#include <string.h>   // For strncpy()
+#include "globals.h"
+#include <string.h>
 
 Preferences Settings::prefs;
 char Settings::deviceName[32] = DEFAULT_DEVICE_NAME;
@@ -9,7 +9,7 @@ char Settings::wifiPassword[64] = DEFAULT_WIFI_PASSWORD;
 char Settings::mqttServer[64] = DEFAULT_MQTT_SERVER;
 uint16_t Settings::mqttPort = DEFAULT_MQTT_PORT;
 
-void Settings::init() {
+void Settings::setup() {
     prefs.begin("microframework", false);
 
     // Load from NVS; if nothing is stored, use defaults from secrets.h
@@ -31,8 +31,7 @@ void Settings::init() {
     }
     mqttPort = prefs.getUShort("mqtt_port", DEFAULT_MQTT_PORT);
 
-    // Uncomment if Logger is included and working
-    // Logger::info("Settings initialized");
+    logI("Settings initialized");
 }
 
 // Getters

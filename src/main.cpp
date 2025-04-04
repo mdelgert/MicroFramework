@@ -2,21 +2,12 @@
 
 void setup()
 {
-  logger.init();
-  settings.init();
-  settings.setDeviceName("ESP32-Device1");
-  logI("Device name: %s", settings.getDeviceName());
+  logger.setup();
+  settings.setup();
+  example.setup();
 }
 
 void loop()
 {
-  /*
-  logI("Free heap memory: %d bytes", ESP.getFreeHeap());
-  logI("Total heap memory: %d bytes", ESP.getHeapSize());
-  logI("Software version: %s", SOFTWARE_VERSION);
-  static int count = 0;
-  logI("Loop iteration %d started.", count);
-  count++;
-  delay(1000);
-  */
+  example.loop();
 }

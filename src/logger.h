@@ -27,6 +27,13 @@
     #define logI(...) Logger::log(LOG_LEVEL_INFO, __VA_ARGS__)
     #define logW(...) Logger::log(LOG_LEVEL_WARNING, __VA_ARGS__)
     #define logE(...) Logger::log(LOG_LEVEL_ERROR, __VA_ARGS__)
+
+    // Support remote debug library
+    #define debugV(...) Logger::log(LOG_LEVEL_VERBOSE, __VA_ARGS__)
+    #define debugD(...) Logger::log(LOG_LEVEL_DEBUG, __VA_ARGS__)
+    #define debugI(...) Logger::log(LOG_LEVEL_INFO, __VA_ARGS__)
+    #define debugW(...) Logger::log(LOG_LEVEL_WARNING, __VA_ARGS__)
+    #define debugE(...) Logger::log(LOG_LEVEL_ERROR, __VA_ARGS__)
 #else
     // Empty macros when logging is disabled (zero runtime cost)
     #define logV(...) do {} while (0)
@@ -34,11 +41,18 @@
     #define logI(...) do {} while (0)
     #define logW(...) do {} while (0)
     #define logE(...) do {} while (0)
+
+    // Support remote debug library
+    #define debugV(...) do {} while (0)
+    #define debugD(...) do {} while (0)
+    #define debugI(...) do {} while (0)
+    #define debugW(...) do {} while (0)
+    #define debugE(...) do {} while (0)
 #endif
 
 class Logger {
 public:
-    static void init();
+    static void setup();
     static void log(uint8_t level, const char* format, ...);
 
 private:

@@ -1,7 +1,7 @@
 #include "logger.h"
 #include <stdarg.h>
 
-void Logger::init() {
+void Logger::setup() {
 #if ENABLE_LOGGING
     Serial.begin(115200);
     delay(1000); // Wait for Serial to stabilize (optional)

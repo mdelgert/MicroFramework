@@ -17,3 +17,4 @@
 // Global classes
 #include "logger.h"
 #include "settings.h"
+#include "example.h"
