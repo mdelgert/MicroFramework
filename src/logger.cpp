@@ -37,7 +37,6 @@ void Logger::log(uint8_t level, const char* format, ...) {
     // Combine prefix and message
     char finalBuffer[LOG_BUFFER_SIZE];
     snprintf(finalBuffer, LOG_BUFFER_SIZE, "%s%s", prefix, buffer);
-
     output(finalBuffer);
 #endif
 }

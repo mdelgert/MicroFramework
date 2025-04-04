@@ -3,17 +3,20 @@
 #include "logger.h"
 
 void setup() {
-  Logger::init(); // Initialize the logger
-  logV("0. Verbose logging is enabled.");
-  logD("1  Debug logging is enabled.");
-  logI("2. Info logging is enabled.");
-  logW("3. Warning logging is enabled.");
-  logE("4. Error logging is enabled.");
+  //Logger::init(); // Initialize the logger
+  logger.init(); // Initialize the logger
+
+  logI("Free heap memory: %d bytes", ESP.getFreeHeap());
+  logI("Total heap memory: %d bytes", ESP.getHeapSize());
+  logI("Free PSRAM memory: %d bytes", ESP.getFreePsram());
+  logI("Total PSRAM memory: %d bytes", ESP.getPsramSize());
 }
 
 void loop() {
-  // static int count = 0;
-  // logI("Loop iteration %d started.", count);
-  // count++;
-  // delay(1000);
+  /*
+  static int count = 0;
+  logI("Loop iteration %d started.", count);
+  count++;
+  delay(1000);
+  */
 }

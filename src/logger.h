@@ -44,3 +44,6 @@ public:
 private:
     static void output(const char* message);
 };
+
+// Global reference
+extern Logger& logger;
