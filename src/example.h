@@ -29,4 +29,4 @@ public:
 #endif
 
 // Global reference
-extern Example example;
+extern Example& example;
