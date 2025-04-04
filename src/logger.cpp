@@ -3,7 +3,7 @@
 
 void Logger::init() {
 #if ENABLE_LOGGING
-    Serial.begin(115200); // Initialize Serial (adjust baud rate as needed)
+    Serial.begin(115200);
     delay(1000); // Wait for Serial to stabilize (optional)
     logI("Logger initialized.");
 #endif

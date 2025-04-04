@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-// Define default secrets.default.h also feature flag to define your own secrets.h
+// Define default secrets
 #ifndef ENABLE_DEFAULT_SECRETS
 #define ENABLE_DEFAULT_SECRETS 1
 #endif
@@ -16,3 +16,4 @@
 
 // Global classes
 #include "logger.h"
+#include "settings.h"

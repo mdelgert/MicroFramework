@@ -25,3 +25,6 @@ private:
     static char mqttServer[64];
     static uint16_t mqttPort;
 };
+
+// External references for the settings
+extern Settings& settings;
