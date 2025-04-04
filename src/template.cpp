@@ -1,10 +1,23 @@
 //template.cpp
 
-#ifndef TEMPLATE_H
-#define TEMPLATE_H 1
-#endif
+#ifdef ENABLE_TEMPLATE_HANDLER
 
-#if TEMPLATE_H
 #include "template.h"
+#include "globals.h"
+
+void Template::init()
+{
+    debugI("Template initialized");
+}
+
+void Template::loop()
+{
+    debugI("Template loop.");
+}
+
+void Template::example()
+{
+    debugI("Template example");
+}
 
 #endif

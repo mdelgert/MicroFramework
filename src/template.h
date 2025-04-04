@@ -1,26 +1,24 @@
-// template.h
+//template.h
+
 #pragma once
 
-#if TEMPLATE_H
+#ifdef ENABLE_TEMPLATE_HANDLER
 
-class TemplateClass
+class Template
 {
 public:
-    static void Begin();
-
+    static void init();
+    static void loop();
 private:
-    static void ExampleFunction();
+    static void example();
 };
 
 #else
 
-class TemplateClass
-{
+class Template { 
 public:
-    Begin();
-
-private:
-    static void ExampleFunction();
+    static void init() {}
+    static void loop() {}
 };
 
 #endif
