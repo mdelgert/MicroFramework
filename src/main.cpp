@@ -4,7 +4,7 @@ void setup()
 {
   logger.init();
   settings.init();
-  // Log the device name
+  settings.setDeviceName("ESP32-Device1");
   logI("Device name: %s", settings.getDeviceName());
 }
 
