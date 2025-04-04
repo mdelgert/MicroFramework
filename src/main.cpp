@@ -2,9 +2,12 @@
 
 void setup()
 {
-  logger.init(); // Initialize the logger
+  logger.init();
+  // Heap memory information
   logI("Free heap memory: %d bytes", ESP.getFreeHeap());
   logI("Total heap memory: %d bytes", ESP.getHeapSize());
+  // Log the software version
+  logI("Software version: %s", SOFTWARE_VERSION);
 }
 
 void loop()
