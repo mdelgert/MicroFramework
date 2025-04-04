@@ -1,24 +1,19 @@
-#include "secrets.h"  // Include your secrets header file
 #include <Arduino.h>
+#include "secrets.h"
+#include "logger.h"
 
 void setup() {
-  Serial.begin(115200);
+  Logger::init(); // Initialize the logger
+  logV("0. Verbose logging is enabled.");
+  logD("1  Debug logging is enabled.");
+  logI("2. Info logging is enabled.");
+  logW("3. Warning logging is enabled.");
+  logE("4. Error logging is enabled.");
 }
 
 void loop() {
-  // Print a message to the Serial Monitor with a number
-  static int count = 0;
-  Serial.print("Test: ");
-  Serial.println(count);
-  count++;
-
-  // Print the device name and Wi-Fi credentials
-  Serial.print("Device Name: ");
-  Serial.println(SECURE_DEVICE_NAME);
-  Serial.print("Wi-Fi SSID: ");
-  Serial.println(SECURE_WIFI_SSID);
-  Serial.print("Wi-Fi Password: ");
-  Serial.println(SECURE_WIFI_PASSWORD);
-
-  delay(1000);
+  // static int count = 0;
+  // logI("Loop iteration %d started.", count);
+  // count++;
+  // delay(1000);
 }
