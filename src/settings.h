@@ -4,7 +4,7 @@
 
 class Settings {
 public:
-    static void setup();
+    static void init();
     static void setDeviceName(const char* name);  // Added setter
     static void setWifiSSID(const char* ssid);    // Added setter
     static void setWifiPassword(const char* pass); // Added setter

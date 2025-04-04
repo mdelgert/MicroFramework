@@ -2,12 +2,12 @@
 
 void setup()
 {
-  logger.setup();
-  settings.setup();
-  example.setup();
+  logger.init();
+  settings.init();
+  example.init();
 }
 
 void loop()
 {
-  //example.loop();
+  example.update();
 }

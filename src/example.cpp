@@ -6,12 +6,12 @@
 
 static int count = 0;
 
-void Example::setup()
+void Example::init()
 {
     logI("Example initialized.");
 }
 
-void Example::loop()
+void Example::update()
 {
     logI("Loop iteration %d started.", count);
     count++;

@@ -9,7 +9,7 @@ char Settings::wifiPassword[64] = DEFAULT_WIFI_PASSWORD;
 char Settings::mqttServer[64] = DEFAULT_MQTT_SERVER;
 uint16_t Settings::mqttPort = DEFAULT_MQTT_PORT;
 
-void Settings::setup() {
+void Settings::init() {
     prefs.begin("microframework", false);
 
     // Load from NVS; if nothing is stored, use defaults from secrets.h

@@ -52,7 +52,7 @@
 
 class Logger {
 public:
-    static void setup();
+    static void init();
     static void log(uint8_t level, const char* format, ...);
 
 private:

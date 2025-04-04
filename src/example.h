@@ -10,8 +10,8 @@
 class Example
 {
 public:
-    static void setup();
-    static void loop();
+    static void init();
+    static void update();
 
 private:
     static void printInfo();
