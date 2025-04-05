@@ -2,10 +2,6 @@
 
 #include <Arduino.h>
 
-// ===================
-// Logger Configuration
-// ===================
-
 // Max size for log messages
 constexpr size_t LOG_BUFFER_SIZE = 128;
 
@@ -28,9 +24,6 @@ enum LogLevel : uint8_t {
 #define ENABLE_LOGGING 1
 #endif
 
-// ===================
-// Logging Macros
-// ===================
 #if ENABLE_LOGGING
     #define logV(...) Logger::log(LOG_LEVEL_VERBOSE, __VA_ARGS__)
     #define logD(...) Logger::log(LOG_LEVEL_DEBUG,   __VA_ARGS__)
@@ -59,9 +52,6 @@ enum LogLevel : uint8_t {
     #define debugE(...) do {} while (0)
 #endif
 
-// ===================
-// Logger Class
-// ===================
 class Logger {
 public:
     static void init();

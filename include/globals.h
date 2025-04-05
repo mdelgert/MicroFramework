@@ -1,4 +1,3 @@
-//globals.h
 #pragma once
 
 #include <Arduino.h>
@@ -15,6 +14,8 @@
 #endif
 
 // Global classes
+#include "pins.h"
 #include "logger.h"
 #include "settings.h"
+#include "led.h"
 #include "example.h"

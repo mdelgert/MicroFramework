@@ -1,20 +1,19 @@
 #pragma once
 
-#ifndef ENABLE_EXAMPLE
-#define ENABLE_EXAMPLE 1
+#ifndef ENABLE_LED
+#define ENABLE_LED 1
 #endif
 
-#if ENABLE_EXAMPLE
+#if ENABLE_LED
 
-class Example
+class Led
 {
 public:
     static void init();
     static void update();
 
 private:
-    static void printInfo();
-    static void printLoglevel();
+    static void flash();
 };
 
 #else
@@ -29,4 +28,4 @@ public:
 #endif
 
 // Global reference
-extern Example& example;
+extern Led& led;

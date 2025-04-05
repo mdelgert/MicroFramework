@@ -1,22 +1,20 @@
-#pragma once  // Using #pragma once instead of #ifndef guard
+#pragma once
 
 #include <Preferences.h>
 
 class Settings {
 public:
     static void init();
-    static void setDeviceName(const char* name);  // Added setter
-    static void setWifiSSID(const char* ssid);    // Added setter
-    static void setWifiPassword(const char* pass); // Added setter
-    static void setMqttServer(const char* server); // Added setter
-    static void setMqttPort(uint16_t port);       // Added setter
-
+    static void setDeviceName(const char* name);
+    static void setWifiSSID(const char* ssid);
+    static void setWifiPassword(const char* pass);
+    static void setMqttServer(const char* server);
+    static void setMqttPort(uint16_t port);
     static const char* getDeviceName();
     static const char* getWifiSSID();
     static const char* getWifiPassword();
     static const char* getMqttServer();
     static uint16_t getMqttPort();
-
 private:
     static Preferences prefs;
     static char deviceName[32];

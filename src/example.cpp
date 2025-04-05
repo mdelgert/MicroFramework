@@ -1,4 +1,3 @@
-// examples.cpp
 #include "example.h"
 #include "globals.h"
 
