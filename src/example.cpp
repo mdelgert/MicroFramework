@@ -9,6 +9,8 @@ static int count = 0;
 void Example::init()
 {
     logI("Example initialized.");
+    printInfo();
+    printLoglevel();
 }
 
 void Example::update()
@@ -24,6 +26,16 @@ void Example::printInfo()
     logI("Total heap memory: %d bytes", ESP.getHeapSize());
     logI("Software version: %s", SOFTWARE_VERSION);
     logI("Device name: %s", settings.getDeviceName());
+}
+
+void Example::printLoglevel()
+{
+    // Log levels
+    logV("Current log level: VERBOSE");
+    logD("Current log level: DEBUG");
+    logI("Current log level: INFO");
+    logW("Current log level: WARNING");
+    logE("Current log level: ERROR");
 }
 
 #endif

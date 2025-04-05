@@ -15,6 +15,7 @@ public:
 
 private:
     static void printInfo();
+    static void printLoglevel();
 };
 
 #else
@@ -22,8 +23,8 @@ private:
 class Example
 {
 public:
-    static void setup() {}
-    static void loop() {}
+    static void init() {}
+    static void update() {}
 };
 
 #endif
