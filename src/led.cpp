@@ -23,12 +23,26 @@ void Led::update()
 
 void Led::flash()
 {
+    if(timer.isOneSecondElapsed()) {
+        // Flash the LED every second
+        static bool ledState = false; // Track the state of the LED
+        ledState = !ledState; // Toggle the state
+
+        if (ledState) {
+            leds[0] = CRGB::GreenYellow; // Set the first LED to GreenYellow
+        } else {
+            leds[0] = CRGB::Black; // Turn off the LED
+        }
+        FastLED.show();
+    }
+    /*
     leds[0] = CRGB::GreenYellow; // Set the first LED to GreenYellow
     FastLED.show();
     delay(500);
     leds[0] = CRGB::Black;
     FastLED.show();
     delay(500);
+    */
 }
 
 void Led::off()

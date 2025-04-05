@@ -56,12 +56,13 @@ void Tft::init()
 
 void Tft::update()
 {
-    // Increment a test message
-    lcd.fillRect(5, 5, 100, 20, TFT_BLACK); // Clear previous text area
-    lcd.setCursor(5, 5);                    // Set cursor position
-    lcd.printf("Counter: %d", counter++);   // Display the counter value
-    debugI("Tft::update() - Counter: %d", counter); // Log the counter value
-    delay(1000); // Delay for 1 second to see the update
+    if(timer.isOneSecondElapsed()) // Check if 1 second has elapsed
+    {
+        debugV("Tft::update() - 1 second elapsed");
+        lcd.fillRect(5, 5, 100, 20, TFT_BLACK); // Clear previous text area
+        lcd.setCursor(5, 5);                    // Set cursor position
+        lcd.printf("Counter: %d", counter++);   // Display the counter value
+    }
 }
 
 void Tft::test()
