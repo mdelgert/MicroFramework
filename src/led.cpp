@@ -31,4 +31,10 @@ void Led::flash()
     delay(500);
 }
 
+void Led::off()
+{
+    leds[0] = CRGB::Black;
+    FastLED.show();
+}
+
 #endif
