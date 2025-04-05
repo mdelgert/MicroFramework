@@ -1,10 +1,10 @@
-#include "gfx.h"
+#include "tft.h"
 #include "globals.h"
 
-#if ENABLE_GFX
+#if ENABLE_TFT
 
-int Gfx::counter = 0;
-LGFX_LiLyGo_TDongleS3 Gfx::tft;
+int Tft::counter = 0;
+LGFX_LiLyGo_TDongleS3 Tft::lcd;
 
 LGFX_LiLyGo_TDongleS3::LGFX_LiLyGo_TDongleS3()
 {
@@ -44,30 +44,30 @@ LGFX_LiLyGo_TDongleS3::LGFX_LiLyGo_TDongleS3()
     setPanel(&_panel_instance); // Attach the panel
 }
 
-void Gfx::init()
+void Tft::init()
 {
-    tft.init();                             // Initialize the display
-    tft.setBrightness(128);                 // Set the backlight brightness
-    tft.setRotation(1);                     // Adjust rotation (modify as needed)
-    tft.fillScreen(TFT_BLACK);              // Clear the screen
-    tft.setTextColor(TFT_WHITE, TFT_BLACK); // White text on black background
-    tft.setTextSize(2);                     // Set the text size
+    lcd.init();                             // Initialize the display
+    lcd.setBrightness(128);                 // Set the backlight brightness
+    lcd.setRotation(1);                     // Adjust rotation (modify as needed)
+    lcd.fillScreen(TFT_BLACK);              // Clear the screen
+    lcd.setTextColor(TFT_WHITE, TFT_BLACK); // White text on black background
+    lcd.setTextSize(2);                     // Set the text size
 }
 
-void Gfx::update()
+void Tft::update()
 {
     // Increment a test message
-    tft.fillRect(5, 5, 100, 20, TFT_BLACK); // Clear previous text area
-    tft.setCursor(5, 5);                    // Set cursor position
-    tft.printf("Counter: %d", counter++);   // Display the counter value
+    lcd.fillRect(5, 5, 100, 20, TFT_BLACK); // Clear previous text area
+    lcd.setCursor(5, 5);                    // Set cursor position
+    lcd.printf("Counter: %d", counter++);   // Display the counter value
     delay(1000); // Delay for 1 second to see the update
 }
 
-void Gfx::test()
+void Tft::test()
 {
-    tft.fillScreen(TFT_BLACK); // Clear the screen
-    tft.setCursor(5, 5);       // Position the cursor
-    tft.println("HELLO");      // Display the message
+    lcd.fillScreen(TFT_BLACK); // Clear the screen
+    lcd.setCursor(5, 5);       // Position the cursor
+    lcd.println("HELLO");      // Display the message
 }
 
 #endif

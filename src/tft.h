@@ -1,10 +1,10 @@
 #pragma once
 
-#ifndef ENABLE_GFX
-#define ENABLE_GFX 1
+#ifndef ENABLE_TFT
+#define ENABLE_TFT 1
 #endif
 
-#if ENABLE_GFX
+#if ENABLE_TFT
 
 #include <LovyanGFX.hpp>
 
@@ -18,7 +18,7 @@ public:
     LGFX_LiLyGo_TDongleS3();
 };
 
-class Gfx
+class Tft
 {
 public:
     static void init();
@@ -26,13 +26,13 @@ public:
     static void test();
 
 private:
-    static LGFX_LiLyGo_TDongleS3 tft;
+    static LGFX_LiLyGo_TDongleS3 lcd;
     static int counter;
 };
 
 #else
 
-class Gfx
+class Tft
 {
 public:
     static void init() {}
@@ -43,4 +43,4 @@ public:
 #endif
 
 // Global reference
-extern Gfx& gfx;
+extern Tft& tft;

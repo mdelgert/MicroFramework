@@ -19,5 +19,5 @@
 #include "settings.h"
 #include "example.h"
 #include "led.h"
-#include "gfx.h"
+#include "tft.h"
 #include "button.h"
