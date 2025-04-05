@@ -11,8 +11,8 @@
 class Button
 {
 public:
-    static void init();
     static void update();
+    static void init();
 
 private:
     static void singleClick();
@@ -25,8 +25,8 @@ private:
 class Button
 {
 public:
-    static void init() {}
     static void update() {}
+    static void init() {}
 };
 
 #endif

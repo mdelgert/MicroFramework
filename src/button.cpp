@@ -5,13 +5,6 @@
 
 static OneButton btn(BUTTON_PIN, true);
 
-void Button::init()
-{
-    btn.attachClick(singleClick);
-    btn.attachDoubleClick(doubleClick);
-    btn.attachLongPressStart(longPressStart);
-}
-
 void Button::update()
 {
     // Update the button state
@@ -21,6 +14,13 @@ void Button::update()
     // For example, you could check for long press duration or other states
     // btn.isLongPressed() can be used to check if it's still pressed after a certain time
     // debugI("Button state updated");
+}
+
+void Button::init()
+{
+    btn.attachClick(singleClick);
+    btn.attachDoubleClick(doubleClick);
+    btn.attachLongPressStart(longPressStart);
 }
 
 void Button::singleClick()
