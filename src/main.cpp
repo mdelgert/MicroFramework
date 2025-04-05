@@ -3,6 +3,7 @@
 void setup()
 {
   logger.init();
+  timer.init();
   settings.init();
   led.init();
   led.off();
@@ -12,6 +13,7 @@ void setup()
 
 void loop()
 {
+  timer.update();
   //tft.update();
   //led.flash();
   //button.update();
