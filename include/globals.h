@@ -17,5 +17,6 @@
 #include "pins.h"
 #include "logger.h"
 #include "settings.h"
-#include "led.h"
 #include "example.h"
+#include "led.h"
+#include "gfx.h"

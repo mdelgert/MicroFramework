@@ -5,11 +5,12 @@ void setup()
   logger.init();
   settings.init();
   led.init();
-  example.init();
+  led.off();
+  gfx.init();
 }
 
 void loop()
 {
+  gfx.update();
   //led.flash();
-  led.off();
 }
