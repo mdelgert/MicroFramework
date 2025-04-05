@@ -7,10 +7,11 @@ void setup()
   led.init();
   led.off();
   gfx.init();
+  gfx.test();
 }
 
 void loop()
 {
-  gfx.update();
+  //gfx.update();
   //led.flash();
 }

@@ -1,13 +1,12 @@
 #pragma once
 
-#include <FastLED.h>
-
 #ifndef ENABLE_LED
 #define ENABLE_LED 1
 #endif
 
 #if ENABLE_LED
 
+#include <FastLED.h>
 #define NUM_LEDS 1
 #define LED_TYPE APA102
 #define COLOR_ORDER BGR
@@ -38,4 +37,4 @@ public:
 #endif
 
 // Global reference
-extern Led& led;
+extern Led &led;
