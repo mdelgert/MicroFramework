@@ -37,4 +37,4 @@ public:
 #endif
 
 // Global reference
-extern Led &led;
+extern Led& led;
