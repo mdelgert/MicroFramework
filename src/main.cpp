@@ -4,10 +4,11 @@ void setup()
 {
   logger.init();
   settings.init();
+  led.init();
   example.init();
 }
 
 void loop()
 {
-  //example.update();
+  led.flash();
 }
