@@ -31,7 +31,7 @@ void Settings::init() {
     }
     mqttPort = prefs.getUShort("mqtt_port", DEFAULT_MQTT_PORT);
 
-    logI("Settings initialized");
+    debugI("Settings initialized");
 }
 
 // Getters

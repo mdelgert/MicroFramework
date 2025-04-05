@@ -7,13 +7,12 @@ void setup()
   led.init();
   led.off();
   tft.init();
-  //tft.test();
   button.init();
 }
 
 void loop()
 {
-  tft.update();
+  //tft.update();
   //led.flash();
   //button.update();
 }

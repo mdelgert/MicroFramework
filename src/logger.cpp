@@ -5,7 +5,7 @@ void Logger::init() {
 #if ENABLE_LOGGING
     Serial.begin(115200);
     delay(1000);  // Optional: wait for Serial stabilization
-    logI("Logger initialized.");
+    debugI("Logger initialized.");
 #endif
 }
 

@@ -7,34 +7,34 @@ static int count = 0;
 
 void Example::init()
 {
-    logI("Example initialized.");
+    debugI("Example initialized.");
     printInfo();
     printLoglevel();
 }
 
 void Example::update()
 {
-    logI("Loop iteration %d started.", count);
+    debugI("Loop iteration %d started.", count);
     count++;
     delay(1000);
 }
 
 void Example::printInfo()
 {
-    logI("Free heap memory: %d bytes", ESP.getFreeHeap());
-    logI("Total heap memory: %d bytes", ESP.getHeapSize());
-    logI("Software version: %s", SOFTWARE_VERSION);
-    logI("Device name: %s", settings.getDeviceName());
+    debugI("Free heap memory: %d bytes", ESP.getFreeHeap());
+    debugI("Total heap memory: %d bytes", ESP.getHeapSize());
+    debugI("Software version: %s", SOFTWARE_VERSION);
+    debugI("Device name: %s", settings.getDeviceName());
 }
 
 void Example::printLoglevel()
 {
     // Log levels
-    logV("Current log level: VERBOSE");
-    logD("Current log level: DEBUG");
-    logI("Current log level: INFO");
-    logW("Current log level: WARNING");
-    logE("Current log level: ERROR");
+    debugV("Current log level: VERBOSE");
+    debugD("Current log level: DEBUG");
+    debugI("Current log level: INFO");
+    debugW("Current log level: WARNING");
+    debugE("Current log level: ERROR");
 }
 
 #endif
