@@ -18,4 +18,5 @@ void loop()
   button.update();
   tft.update();
   led.flash();
+  example.update();
 }

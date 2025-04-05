@@ -14,9 +14,12 @@ void Example::init()
 
 void Example::update()
 {
-    debugI("Loop iteration %d started.", count);
-    count++;
-    delay(1000);
+    // debugI("Loop iteration %d started.", count);
+    // count++;
+    // delay(1000);
+    if(timer.isOneSecondElapsed()) {
+        printInfo();
+    }
 }
 
 void Example::printInfo()
