@@ -7,14 +7,11 @@
 
 void Network::init()
 {
-// Connect to WiFi if not already connected
+    // Connect to WiFi if not already connected
     if (!isConnected()) {
         debugI("Connecting to WiFi...");
-        debugI("SSID: %s", settings.getWifiSSID());
-        debugI("Password: %s", settings.getWifiPassword());
-        // Attempt to connect to WiFi
-        WiFi.mode(WIFI_STA); // Set WiFi mode to Station
-        WiFi.disconnect(); // Clear any previous connection
+        WiFi.mode(WIFI_STA);
+        WiFi.disconnect();
         if(timer.isOneSecondElapsed)
         {
             WiFi.begin(settings.getWifiSSID(), settings.getWifiPassword());
@@ -25,7 +22,7 @@ void Network::init()
 void Network::update()
 {
     // Check if WiFi is connected
-    if(timer.isSixtySecondsElapsed)
+    if(timer.isSixtySecondsElapsed())
     {
         if(!isConnected()) {
             debugW("WiFi not connected, trying to reconnect...");
