@@ -15,10 +15,13 @@
 
 // Global classes
 #include "pins.h"
-#include "logger.h"
-#include "settings.h"
 #include "button.h"
+#include "empty.h"
 #include "example.h"
 #include "led.h"
+#include "logger.h"
+#include "mqtt.h"
+#include "network.h"
+#include "settings.h"
 #include "tft.h"
 #include "timer.h"

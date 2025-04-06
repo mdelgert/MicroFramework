@@ -1,24 +1,23 @@
 #pragma once
 
-#ifndef ENABLE_WIFI_MANAGER
-#define ENABLE_WIFI_MANAGER 1
+#ifndef ENABLE_NETWORK
+#define ENABLE_NETWORK 1
 #endif
 
-#if ENABLE_WIFI_MANAGER
+#if ENABLE_NETWORK
 
-class WiFiManager
+class Network
 {
 public:
     static void init();
     static void update();
-
 private:
 
 };
 
 #else
 
-class WiFiManager
+class Network
 {
 public:
     static void init() {}
@@ -26,3 +25,6 @@ public:
 };
 
 #endif
+
+// Global reference
+extern Network& network;
