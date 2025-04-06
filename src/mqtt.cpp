@@ -4,6 +4,7 @@
 
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
+#include <WiFi.h>
 
 // WiFi and MQTT client initialization
 WiFiClientSecure esp_client;
@@ -15,7 +16,6 @@ void Mqtt::init()
     esp_client.setCACert(ca_cert);
     mqtt_client.setServer(settings.getMqttServer(), settings.getMqttPort());
     mqtt_client.setKeepAlive(60);
-    //mqtt_client.setSocketTimeout(15);
     mqtt_client.setCallback(mqttCallback);
     connectToMQTT();
 }
@@ -33,19 +33,24 @@ void Mqtt::connectToMQTT()
 {
     while (!mqtt_client.connected())
     {
-        debugI("Connecting to MQTT Broker as %s...\n", settings.getDeviceName());
-        if (mqtt_client.connect(settings.getDeviceName(), settings.getMqttUsername(), settings.getMqttPassword()))
+        // Check if WiFi is connected
+        if (WiFi.status() == WL_CONNECTED)
         {
-            debugI("Connected to MQTT broker");
-            mqtt_client.subscribe("testtopic/subscribe");
-            mqtt_client.publish("testtopic/publish", "Hello");
-        }
-        else
-        {
-            if (timer.isFifteenSecondsElapsed())
+            // Attempt to connect to the MQTT broker
+            debugI("Connecting to MQTT Broker as %s...\n", settings.getDeviceName());
+            if (mqtt_client.connect(settings.getDeviceName(), settings.getMqttUsername(), settings.getMqttPassword()))
             {
-                debugI("Failed to connect to MQTT broker, rc=%i ", mqtt_client.state());
-                debugI(" Retrying in 15 seconds.");
+                debugI("Connected to MQTT broker");
+                mqtt_client.subscribe("testtopic/subscribe");
+                mqtt_client.publish("testtopic/publish", "Hello");
+            }
+            else
+            {
+                if (timer.isFifteenSecondsElapsed())
+                {
+                    debugI("Failed to connect to MQTT broker, rc=%i ", mqtt_client.state());
+                    debugI(" Retrying in 15 seconds.");
+                }
             }
         }
     }
