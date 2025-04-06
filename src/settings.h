@@ -14,6 +14,8 @@ private:
     static char mqttServer[64];
     static char mqttUsername[32];
     static char mqttPassword[64];
+    static char mqttPubTopic[64];
+    static char mqttSubTopic[64];
     static uint16_t mqttPort;
 
 public:
@@ -28,6 +30,8 @@ public:
     static void setMqttServer(const char *server);
     static void setMqttUsername(const char *user);
     static void setMqttPassword(const char *pass);
+    static void setMqttPubTopic(const char *topic);
+    static void setMqttSubTopic(const char *topic);
     static void setMqttPort(uint16_t port);
 
     // Getters
@@ -39,6 +43,8 @@ public:
     static const char *getMqttServer();
     static const char *getMqttUsername();
     static const char *getMqttPassword();
+    static const char *getMqttPubTopic();
+    static const char *getMqttSubTopic();
     static uint16_t getMqttPort();
 };
 
