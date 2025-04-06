@@ -22,7 +22,7 @@ void Network::init()
 void Network::update()
 {
     // Check if WiFi is connected
-    if(timer.isSixtySecondsElapsed())
+    if(timer.isOneMinuteElapsed())
     {
         if(!isConnected()) {
             debugW("WiFi not connected, trying to reconnect...");

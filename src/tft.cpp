@@ -58,23 +58,13 @@ void Tft::update()
 {
     if(timer.isOneSecondElapsed()) // Check if 1 second has elapsed
     {
-        // lcd.fillRect(5, 5, 100, 20, TFT_BLACK); // Clear previous text area
-        // lcd.setCursor(5, 5);                    // Set cursor position
-        // lcd.printf("Counter: %d", counter++);   // Display the counter value
-        // debugI("Tft::update() - Counter updated: %d", counter);
-        printHeap(); // Call printHeap to display heap memory info
+        lcd.setCursor(5, 5);
+        lcd.fillRect(5, 5, 200, 20, TFT_BLACK);
+        lcd.printf("FH: %d", ESP.getFreeHeap());
+        lcd.setCursor(5, 25);
+        lcd.fillRect(5, 25, 200, 20, TFT_BLACK);
+        lcd.printf("UT: %d", timer.getUptimeSeconds());
     }
-}
-
-void Tft::printHeap()
-{
-    // Print heap memory information
-    size_t freeHeap = esp_get_free_heap_size();
-    size_t minFreeHeap = esp_get_minimum_free_heap_size();
-    //debugI("Tft::printHeap() - Free Heap: %d bytes, Min Free Heap: %d bytes", freeHeap, minFreeHeap);
-    lcd.setCursor(5, 30); // Set cursor position for heap info
-    lcd.fillRect(5, 30, 200, 20, TFT_BLACK); // Clear previous heap info area
-    lcd.printf("Free: %d", freeHeap);
 }
 
 void Tft::test()
