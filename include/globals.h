@@ -16,7 +16,6 @@
 // Global classes
 #include "pins.h"
 #include "button.h"
-#include "example.h"
 #include "led.h"
 #include "logger.h"
 #include "mqtt.h"
