@@ -23,6 +23,7 @@ class Tft
 public:
     static void init();
     static void update();
+    static void printHeap();
     static void test();
 
 private:
@@ -37,6 +38,7 @@ class Tft
 public:
     static void init() {}
     static void update() {}
+    static void printHeap() {}
     static void test() {}
 };
 
