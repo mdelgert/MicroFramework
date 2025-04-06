@@ -13,7 +13,6 @@ class Timer
 public:
     static void init();
     static void update();
-    static uint64_t getUptimeSeconds();
     static bool isHalfSecondElapsed();
     static bool isOneSecondElapsed();
     static bool isFifteenSecondsElapsed();
@@ -22,9 +21,9 @@ public:
     static bool isFifteenMinutesElapsed();
     static bool isThirtyMinutesElapsed();
     static bool isOneHourElapsed();
+    static uint64_t getUptimeSeconds();
 
 private:
-    static uint64_t uptimeSeconds;
     static uint32_t lastHalfSec;
     static uint32_t lastOneSec;
     static uint32_t lastFifteenSec;
@@ -33,6 +32,7 @@ private:
     static uint32_t lastFifteenMin;
     static uint32_t lastThirtyMin;
     static uint32_t lastOneHour;
+    static uint64_t uptimeSeconds;
 
     static bool halfSecondElapsed;
     static bool oneSecondElapsed;
@@ -51,7 +51,6 @@ class Timer
 public:
     static void init() {}
     static void update() {}
-    static uint64_t getUptimeSeconds() { return 0; }
     static bool isHalfSecondElapsed() { return false; }
     static bool isOneSecondElapsed() { return false; }
     static bool isFifteenSecondsElapsed() { return false; }
@@ -60,6 +59,7 @@ public:
     static bool isFifteenMinutesElapsed() { return false; }
     static bool isThirtyMinutesElapsed() { return false; }
     static bool isOneHourElapsed() { return false; }
+    static uint64_t getUptimeSeconds() { return 0; }
 };
 
 #endif

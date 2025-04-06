@@ -4,7 +4,6 @@
 #if ENABLE_TIMER
 
 // Static member initialization
-uint64_t Timer::uptimeSeconds = 0;
 uint32_t Timer::lastHalfSec = 0;
 uint32_t Timer::lastOneSec = 0;
 uint32_t Timer::lastFifteenSec = 0;
@@ -13,6 +12,7 @@ uint32_t Timer::lastOneMin = 0;
 uint32_t Timer::lastFifteenMin = 0;
 uint32_t Timer::lastThirtyMin = 0;
 uint32_t Timer::lastOneHour = 0;
+uint64_t Timer::uptimeSeconds = 0;
 
 bool Timer::halfSecondElapsed = false;
 bool Timer::oneSecondElapsed = false;
@@ -27,8 +27,7 @@ bool Timer::oneHourElapsed = false;
 static bool hasIntervalElapsed(uint32_t &lastTime, uint32_t interval)
 {
     uint32_t currentMillis = millis();
-    if (currentMillis - lastTime >= interval)
-    {
+    if (currentMillis - lastTime >= interval) {
         lastTime = currentMillis;
         return true;
     }
@@ -37,7 +36,6 @@ static bool hasIntervalElapsed(uint32_t &lastTime, uint32_t interval)
 
 void Timer::init()
 {
-    uptimeSeconds = 0;
     uint32_t currentMillis = millis();
     lastHalfSec = currentMillis;
     lastOneSec = currentMillis;
@@ -47,6 +45,7 @@ void Timer::init()
     lastFifteenMin = currentMillis;
     lastThirtyMin = currentMillis;
     lastOneHour = currentMillis;
+    uptimeSeconds = 0;
 }
 
 void Timer::update()
