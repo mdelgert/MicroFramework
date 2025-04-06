@@ -7,14 +7,20 @@
 
 void Ntp::init()
 {
-    // Set the timezone to America/New_York
-    configTime(-5 * 3600, 3600, "pool.ntp.org", "time.nist.gov"); // UTC-5 with DST adjustment
+    // Set the timezone to America/New_York (UTC-5 with DST adjustment)
+    const long gmtOffsetSec = -5 * 3600; // GMT offset in seconds
+    const int daylightOffsetSec = 3600;  // Daylight Saving Time offset in seconds
+    const char *ntpServer1 = "time.google.com";
+    const char *ntpServer2 = "time.cloudflare.com";
+    const char *ntpServer3 = "pool.ntp.org"; //time.nist.gov
+
+    configTime(gmtOffsetSec, daylightOffsetSec, ntpServer1, ntpServer2, ntpServer3);
     debugI("NTP initialized. Waiting for time sync...");
 
     // Wait for time to be set
     struct tm timeInfo;
-    if (!getLocalTime(&timeInfo, 10000))
-    { // Wait up to 10 seconds
+    if (!getLocalTime(&timeInfo, 10000)) // Wait up to 10 seconds
+    {
         debugE("Failed to obtain time from NTP servers.");
     }
     else
@@ -26,15 +32,14 @@ void Ntp::init()
 
 void Ntp::update()
 {
-    // Check if the time is synchronized
+    // Periodically check if the time is synchronized
     if (timer.isTenMinutesElapsed())
     {
         struct tm timeInfo;
         if (!getLocalTime(&timeInfo))
         {
-            debugI("Time sync lost. Attempting to resync...");
+            debugW("Time sync lost. Attempting to resync...");
             init(); // Reinitialize NTP if time sync is lost
-            return;
         }
         else
         {
