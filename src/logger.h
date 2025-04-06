@@ -1,6 +1,6 @@
 #pragma once
 
-#include <Arduino.h>
+#include "globals.h"
 
 // Max size for log messages
 constexpr size_t LOG_BUFFER_SIZE = 128;

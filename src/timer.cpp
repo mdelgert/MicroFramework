@@ -1,5 +1,4 @@
 #include "timer.h"
-#include "globals.h"
 
 #if ENABLE_TIMER
 

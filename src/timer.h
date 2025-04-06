@@ -6,7 +6,7 @@
 
 #if ENABLE_TIMER
 
-#include <Arduino.h>
+#include "globals.h"
 
 class Timer
 {
