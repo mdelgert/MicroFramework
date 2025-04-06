@@ -19,3 +19,6 @@ void Mqtt::update()
 }
 
 #endif
+
+//https://www.emqx.com/en/blog/esp32-connects-to-the-free-public-mqtt-broker
+//https://github.com/emqx/MQTT-Client-Examples/blob/master/mqtt-client-ESP32/esp32_connect_mqtt_via_tls.ino
