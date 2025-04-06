@@ -12,6 +12,7 @@ void setup()
   button.init();
   led.init();
   tft.init();
+  kmd.init();
 }
 
 void loop()

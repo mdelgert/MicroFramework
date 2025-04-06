@@ -14,14 +14,14 @@ enum LogLevel : uint8_t {
     LOG_LEVEL_ERROR   = 4
 };
 
-// Default log level (overridable via build flags)
-#ifndef LOG_LEVEL
-#define LOG_LEVEL LOG_LEVEL_INFO
-#endif
-
 // Logging enable flag (can be overridden in platformio.ini)
 #ifndef ENABLE_LOGGING
 #define ENABLE_LOGGING 1
+#endif
+
+// Default log level (overridable via build flags)
+#ifndef LOG_LEVEL
+#define LOG_LEVEL LOG_LEVEL_INFO
 #endif
 
 #if ENABLE_LOGGING

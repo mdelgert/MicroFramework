@@ -13,9 +13,15 @@
 #include "secrets.default.h"
 #endif
 
+// Global configuration - https://the-sz.com/products/usbid/index.php
+#define CUSTOM_PRODUCT_NAME "KMD"
+#define CUSTOM_MANUFACTURER "Unifying Receiver"
+#define CUSTOM_SERIAL_NUMBER "KMD01-2025-04-00001"
+
 // Global classes
 #include "pins.h"
 #include "button.h"
+#include "kmd.h"
 #include "led.h"
 #include "logger.h"
 #include "mqtt.h"
