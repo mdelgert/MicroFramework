@@ -19,9 +19,9 @@ public:
     static uint64_t getUptimeSeconds();
 
 private:
-    static unsigned long lastOneSec;
-    static unsigned long lastThirtySec;
-    static unsigned long lastSixtySec;
+    static uint32_t lastOneSec;
+    static uint32_t lastThirtySec;
+    static uint32_t lastSixtySec;
     static bool oneSecondElapsed;
     static bool thirtySecondsElapsed;
     static bool sixtySecondsElapsed;

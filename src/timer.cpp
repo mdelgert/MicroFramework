@@ -3,53 +3,51 @@
 
 #if ENABLE_TIMER
 
-unsigned long Timer::lastOneSec = 0;
-unsigned long Timer::lastThirtySec = 0;
-unsigned long Timer::lastSixtySec = 0;
+// Static member initialization
+uint32_t Timer::lastOneSec = 0;
+uint32_t Timer::lastThirtySec = 0;
+uint32_t Timer::lastSixtySec = 0;
 uint64_t Timer::uptimeSeconds = 0;
 
 bool Timer::oneSecondElapsed = false;
 bool Timer::thirtySecondsElapsed = false;
 bool Timer::sixtySecondsElapsed = false;
 
+// Helper function to check if a time interval has elapsed
+static bool hasIntervalElapsed(uint32_t &lastTime, uint32_t interval)
+{
+    uint32_t currentMillis = millis();
+    if (currentMillis - lastTime >= interval) {
+        lastTime = currentMillis;
+        return true;
+    }
+    return false;
+}
+
 void Timer::init()
 {
-    lastOneSec = millis();
-    lastThirtySec = millis();
-    lastSixtySec = millis();
+    uint32_t currentMillis = millis();
+    lastOneSec = currentMillis;
+    lastThirtySec = currentMillis;
+    lastSixtySec = currentMillis;
+    uptimeSeconds = 0;
 }
 
 void Timer::update()
 {
-    unsigned long currentMillis = millis();
-
     // Check for 1-second interval
-    if (currentMillis - lastOneSec >= 1000) {
-        lastOneSec = currentMillis;
-        oneSecondElapsed = true;
-        uptimeSeconds++;
-        //debugV("1 second elapsed");
-        debugV("Uptime: %llu seconds", uptimeSeconds);
-    } else {
-        oneSecondElapsed = false;
-    }
+    oneSecondElapsed = hasIntervalElapsed(lastOneSec, 1000);
 
     // Check for 30-second interval
-    if (currentMillis - lastThirtySec >= 30000) {
-        lastThirtySec = currentMillis;
-        thirtySecondsElapsed = true;
-        //debugV("30 seconds elapsed");
-    } else {
-        thirtySecondsElapsed = false;
-    }
+    thirtySecondsElapsed = hasIntervalElapsed(lastThirtySec, 30000);
 
     // Check for 60-second interval
-    if (currentMillis - lastSixtySec >= 60000) {
-        lastSixtySec = currentMillis;
-        sixtySecondsElapsed = true;
-        //debugV("60 seconds elapsed");
-    } else {
-        sixtySecondsElapsed = false;
+    sixtySecondsElapsed = hasIntervalElapsed(lastSixtySec, 60000);
+
+    // Update uptime seconds only if one second has elapsed
+    if (oneSecondElapsed) {
+        uptimeSeconds++;
+        debugV("Uptime: %llu seconds", uptimeSeconds);
     }
 }
 
@@ -68,7 +66,7 @@ bool Timer::isSixtySecondsElapsed()
     return sixtySecondsElapsed;
 }
 
-unsigned long long Timer::getUptimeSeconds()
+uint64_t Timer::getUptimeSeconds()
 {
     return uptimeSeconds;
 }
