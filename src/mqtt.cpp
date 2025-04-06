@@ -4,6 +4,11 @@
 #if ENABLE_MQTT
 
 #include <PubSubClient.h>
+#include <WiFiClientSecure.h>
+
+// WiFi and MQTT client initialization
+WiFiClientSecure esp_client;
+PubSubClient mqtt_client(esp_client);
 
 void Mqtt::init()
 {

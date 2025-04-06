@@ -6,8 +6,9 @@ void setup()
   settings.init();
   timer.init();
   network.init();
-  ota.init();
   ntp.init();
+  ota.init();
+  mqtt.init();
   button.init();
   led.init();
   tft.init();
@@ -17,8 +18,9 @@ void loop()
 {
   timer.update();
   network.update();
-  ota.update();
   ntp.update();
+  ota.update();
+  mqtt.update();
   button.update();
   tft.update();
 }

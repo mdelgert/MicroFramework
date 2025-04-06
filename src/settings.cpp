@@ -9,6 +9,8 @@ char Settings::timezone[64] = DEFAULT_TIMEZONE;
 char Settings::wifiSSID[32] = DEFAULT_WIFI_SSID;
 char Settings::wifiPassword[64] = DEFAULT_WIFI_PASSWORD;
 char Settings::mqttServer[64] = DEFAULT_MQTT_SERVER;
+char Settings::mqttUsername[32] = DEFAULT_MQTT_USERNAME;
+char Settings::mqttPassword[64] = DEFAULT_MQTT_PASSWORD;
 uint16_t Settings::mqttPort = DEFAULT_MQTT_PORT;
 
 void Settings::init() {
@@ -39,6 +41,14 @@ void Settings::init() {
         strncpy(mqttServer, DEFAULT_MQTT_SERVER, sizeof(mqttServer) - 1);
         mqttServer[sizeof(mqttServer) - 1] = '\0';
     }
+    if (prefs.getString("mqtt_user", mqttUsername, sizeof(mqttUsername)) == 0) {
+        strncpy(mqttUsername, DEFAULT_MQTT_USERNAME, sizeof(mqttUsername) - 1);
+        mqttUsername[sizeof(mqttUsername) - 1] = '\0';
+    }
+    if (prefs.getString("mqtt_pass", mqttPassword, sizeof(mqttPassword)) == 0) {
+        strncpy(mqttPassword, DEFAULT_MQTT_PASSWORD, sizeof(mqttPassword) - 1);
+        mqttPassword[sizeof(mqttPassword) - 1] = '\0';
+    }
     mqttPort = prefs.getUShort("mqtt_port", DEFAULT_MQTT_PORT);
 
     debugI("Settings initialized");
@@ -51,6 +61,8 @@ const char* Settings::getTimezone() { return timezone; }
 const char* Settings::getWifiSSID() { return wifiSSID; }
 const char* Settings::getWifiPassword() { return wifiPassword; }
 const char* Settings::getMqttServer() { return mqttServer; }
+const char* Settings::getMqttUsername() { return mqttUsername; }
+const char* Settings::getMqttPassword() { return mqttPassword; }
 uint16_t Settings::getMqttPort() { return mqttPort; }
 
 // Setters
@@ -88,6 +100,18 @@ void Settings::setMqttServer(const char* server) {
     strncpy(mqttServer, server, sizeof(mqttServer) - 1);
     mqttServer[sizeof(mqttServer) - 1] = '\0';
     prefs.putString("mqtt_server", mqttServer);
+}
+
+void Settings::setMqttUsername(const char* user) { // Setter for MQTT username
+    strncpy(mqttUsername, user, sizeof(mqttUsername) - 1);
+    mqttUsername[sizeof(mqttUsername) - 1] = '\0';
+    prefs.putString("mqtt_user", mqttUsername);
+}
+
+void Settings::setMqttPassword(const char* pass) { // Setter for MQTT password
+    strncpy(mqttPassword, pass, sizeof(mqttPassword) - 1);
+    mqttPassword[sizeof(mqttPassword) - 1] = '\0';
+    prefs.putString("mqtt_pass", mqttPassword);
 }
 
 void Settings::setMqttPort(uint16_t port) {

@@ -26,3 +26,6 @@ public:
 };
 
 #endif
+
+// Global reference
+extern Mqtt mqtt;
