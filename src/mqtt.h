@@ -4,7 +4,7 @@
 #define ENABLE_MQTT 1
 #endif
 
-#if ENABLE_MQTT
+#if ENABLE_MQTT && ENABLE_NETWORK
 
 #include "globals.h"
 

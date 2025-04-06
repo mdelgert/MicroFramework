@@ -1,6 +1,6 @@
 #include "mqtt.h"
 
-#if ENABLE_MQTT
+#if ENABLE_MQTT && ENABLE_NETWORK
 
 #include <PubSubClient.h>
 #include <WiFiClientSecure.h>
