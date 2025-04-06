@@ -16,6 +16,7 @@ public:
     static bool isOneSecondElapsed();
     static bool isThirtySecondsElapsed();
     static bool isSixtySecondsElapsed();
+    static uint64_t getUptimeSeconds();
 
 private:
     static unsigned long lastOneSec;
@@ -24,6 +25,7 @@ private:
     static bool oneSecondElapsed;
     static bool thirtySecondsElapsed;
     static bool sixtySecondsElapsed;
+    static uint64_t uptimeSeconds;
 };
 
 #else
@@ -36,6 +38,7 @@ public:
     static bool isOneSecondElapsed() { return false; }
     static bool isThirtySecondsElapsed() { return false; }
     static bool isSixtySecondsElapsed() { return false; }
+    static uint64_t getUptimeSeconds() { return 0; }
 };
 
 #endif

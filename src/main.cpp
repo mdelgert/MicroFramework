@@ -6,18 +6,16 @@ void setup()
   settings.init();
   timer.init();
   network.init();
-  example.init();
   button.init();
   led.init();
+  led.off();
   tft.init();
 }
 
 void loop()
 {
   timer.update();
-  //network.update();
-  //example.update();
+  network.update();
   button.update();
-  //led.flash();
-  //tft.update();
+  tft.update();
 }

@@ -6,6 +6,7 @@
 unsigned long Timer::lastOneSec = 0;
 unsigned long Timer::lastThirtySec = 0;
 unsigned long Timer::lastSixtySec = 0;
+uint64_t Timer::uptimeSeconds = 0;
 
 bool Timer::oneSecondElapsed = false;
 bool Timer::thirtySecondsElapsed = false;
@@ -26,7 +27,9 @@ void Timer::update()
     if (currentMillis - lastOneSec >= 1000) {
         lastOneSec = currentMillis;
         oneSecondElapsed = true;
-        debugV("1 second elapsed");
+        uptimeSeconds++;
+        //debugV("1 second elapsed");
+        debugV("Uptime: %llu seconds", uptimeSeconds);
     } else {
         oneSecondElapsed = false;
     }
@@ -35,7 +38,7 @@ void Timer::update()
     if (currentMillis - lastThirtySec >= 30000) {
         lastThirtySec = currentMillis;
         thirtySecondsElapsed = true;
-        debugV("30 seconds elapsed");
+        //debugV("30 seconds elapsed");
     } else {
         thirtySecondsElapsed = false;
     }
@@ -44,7 +47,7 @@ void Timer::update()
     if (currentMillis - lastSixtySec >= 60000) {
         lastSixtySec = currentMillis;
         sixtySecondsElapsed = true;
-        debugV("60 seconds elapsed");
+        //debugV("60 seconds elapsed");
     } else {
         sixtySecondsElapsed = false;
     }
@@ -63,6 +66,11 @@ bool Timer::isThirtySecondsElapsed()
 bool Timer::isSixtySecondsElapsed()
 {
     return sixtySecondsElapsed;
+}
+
+unsigned long long Timer::getUptimeSeconds()
+{
+    return uptimeSeconds;
 }
 
 #endif
