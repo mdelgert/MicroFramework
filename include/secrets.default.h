@@ -7,6 +7,7 @@
 
 // Default values for GitHub/public use
 #define DEFAULT_DEVICE_NAME "ESP32_Device"
+#define DEFAULT_DEVICE_PASSWORD "password"
 #define DEFAULT_WIFI_SSID "MyWiFi"
 #define DEFAULT_WIFI_PASSWORD "password123"
 #define DEFAULT_MQTT_SERVER "mqtt.example.com"

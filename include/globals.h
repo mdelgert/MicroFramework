@@ -21,6 +21,7 @@
 #include "logger.h"
 #include "mqtt.h"
 #include "network.h"
+#include "ota.h"
 #include "settings.h"
 #include "tft.h"
 #include "timer.h"
