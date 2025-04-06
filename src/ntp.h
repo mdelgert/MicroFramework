@@ -13,7 +13,6 @@ public:
     static void update();
 
 private:
-
 };
 
 #else
@@ -28,4 +27,4 @@ public:
 #endif
 
 // Global reference
-extern Ntp& ntp;
+extern Ntp &ntp;

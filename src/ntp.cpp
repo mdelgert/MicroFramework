@@ -27,7 +27,7 @@ void Ntp::init()
 void Ntp::update()
 {
     // Check if the time is synchronized
-    if(timer.isTenMinutesElapsed())
+    if (timer.isTenMinutesElapsed())
     {
         struct tm timeInfo;
         if (!getLocalTime(&timeInfo))
@@ -41,24 +41,6 @@ void Ntp::update()
             debugI("Current time: %s", asctime(&timeInfo));
         }
     }
-
-    /*
-    if(timer.isOneSecondElapsed())
-    {
-        // Print the current time every 1 second
-        struct tm timeInfo;
-        if (getLocalTime(&timeInfo))
-        {
-            char timeString[26];
-            strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", &timeInfo);
-            debugI("Current time: %s", timeString);
-        }
-        else
-        {
-            debugE("Failed to get local time.");
-        }
-    }
-    */
 }
 
 #endif

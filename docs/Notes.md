@@ -54,3 +54,21 @@ void Tft::update()
     }
 }
 */
+
+    /*
+    if(timer.isOneSecondElapsed())
+    {
+        // Print the current time every 1 second
+        struct tm timeInfo;
+        if (getLocalTime(&timeInfo))
+        {
+            char timeString[26];
+            strftime(timeString, sizeof(timeString), "%Y-%m-%d %H:%M:%S", &timeInfo);
+            debugI("Current time: %s", timeString);
+        }
+        else
+        {
+            debugE("Failed to get local time.");
+        }
+    }
+    */

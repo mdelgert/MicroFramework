@@ -11,14 +11,12 @@ void Network::init()
     // Connect to WiFi if not already connected
     if (!isConnected()) {
         debugI("Connecting to WiFi...");
-        WiFi.mode(WIFI_STA);
         WiFi.disconnect();
-        if(timer.isOneSecondElapsed)
-        {
-            WiFi.begin(settings.getWifiSSID(), settings.getWifiPassword());
-            MDNS.begin(settings.getDeviceName());
-            MDNS.addService("_http", "_tcp", 80);
-        }
+        WiFi.mode(WIFI_STA);
+        WiFi.setHostname(settings.getDeviceName());
+        WiFi.begin(settings.getWifiSSID(), settings.getWifiPassword());
+        MDNS.begin(settings.getDeviceName());
+        MDNS.addService("_http", "_tcp", 80);
     }
 }
 
