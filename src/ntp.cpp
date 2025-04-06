@@ -13,7 +13,6 @@ void logCurrentTime(const struct tm& timeInfo) {
 // Set the timezone to America/New_York (UTC-5 with DST adjustment)
 void Ntp::init()
 {
-    // Set the timezone to America/New_York (UTC-5 with DST adjustment)
     const long gmtOffsetSec = -5 * 3600; // GMT offset in seconds
     const int daylightOffsetSec = 3600;  // Daylight Saving Time offset in seconds
     const int syncTimeoutMs = 10000; // 10 seconds timeout
