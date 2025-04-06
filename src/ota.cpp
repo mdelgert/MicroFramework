@@ -3,6 +3,7 @@
 
 #if ENABLE_OTA
 
+#include <WiFi.h>
 #include <ArduinoOTA.h>
 
 void Ota::init()
@@ -42,8 +43,14 @@ void Ota::init()
 
 void Ota::update()
 {
-    if(network.isConnected()) {
+    // Only call handle if WiFi is connected to avoid OTA errors
+    if (WiFi.status() == WL_CONNECTED) {
         ArduinoOTA.handle();
+    } else {
+       
+        if(timer.isThirtySecondsElapsed()) {
+            debugW("WiFi not connected, skipping OTA handle");
+        }
     }
 }
 

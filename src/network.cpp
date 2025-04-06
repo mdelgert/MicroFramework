@@ -8,10 +8,10 @@
 
 void Network::init()
 {
-    // Connect to WiFi if not already connected
-    if (!isConnected()) {
-        debugI("Connecting to WiFi...");
-        WiFi.disconnect();
+    debugI("Connecting to WiFi...");
+    WiFi.disconnect();
+
+    if( WiFi.status() != WL_CONNECTED) {
         WiFi.mode(WIFI_STA);
         WiFi.setHostname(settings.getDeviceName());
         WiFi.begin(settings.getWifiSSID(), settings.getWifiPassword());
@@ -25,22 +25,10 @@ void Network::update()
     // Check if WiFi is connected
     if(timer.isOneMinuteElapsed())
     {
-        if(!isConnected()) {
+        if (WiFi.status() != WL_CONNECTED) {
             debugW("WiFi not connected, trying to reconnect...");
             init();
         }
-    }
-}
-
-bool Network::isConnected()
-{
-    // Check WiFi connection status
-    if (WiFi.status() == WL_CONNECTED) {
-        //debugI("Network is connected: %s", WiFi.localIP().toString().c_str());
-        return true;
-    } else {
-        debugW("Network not connected");
-        return false;
     }
 }
 
