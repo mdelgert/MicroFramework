@@ -9,7 +9,9 @@ CRGB Led::leds[NUM_LEDS];
 void Led::init()
 {
     FastLED.addLeds<LED_TYPE, LED_DI_PIN, LED_CI_PIN, COLOR_ORDER>(leds, NUM_LEDS);
-    FastLED.setBrightness(25); // Set initial brightness (0-255)
+    FastLED.setBrightness(25);
+    leds[0] = CRGB::Black;
+    FastLED.show();
     debugI("Led initialized with %d LED(s)", NUM_LEDS);
 }
 

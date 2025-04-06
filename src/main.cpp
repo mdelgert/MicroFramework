@@ -8,7 +8,6 @@ void setup()
   network.init();
   button.init();
   led.init();
-  led.off();
   tft.init();
 }
 
