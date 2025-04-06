@@ -52,38 +52,58 @@ void Tft::init()
     lcd.setRotation(1);                     // Adjust rotation (modify as needed)
     lcd.fillScreen(TFT_BLACK);              // Clear the screen
     lcd.setTextColor(TFT_WHITE, TFT_BLACK); // White text on black background
-    lcd.setTextSize(2);                     // Set the text size
+    lcd.setTextSize(1.75);                     // Set the text size
 }
 
 void Tft::update()
 {
-    if(timer.isOneSecondElapsed()) // Check if 1 second has elapsed
+    if (timer.isOneSecondElapsed()) // Check if 1 second has elapsed
     {
-        // Heap
-        lcd.setCursor(0, 0);
-        lcd.fillRect(0, 0, 200, 20, TFT_BLACK);
-        lcd.printf("FH: %d", ESP.getFreeHeap());
-
-        lcd.setCursor(0, 20);
-        lcd.fillRect(0, 20, 200, 20, TFT_BLACK);
-        lcd.printf("UT: %d", timer.getUptimeSeconds());
+        const int lineHeight = 20;  // Height of each line
+        const int x = 3;            // Fixed x-coordinate for all lines
+        int y = x;                  // Start y-coordinate
         
-        // Print ip address
-        lcd.fillRect(0, 40, 200, 20, TFT_BLACK);
-        if (WiFi.status() == WL_CONNECTED) {
-            IPAddress ip = WiFi.localIP();
-            lcd.setCursor(0, 40);
-            //lcd.printf("IP: %d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
-            lcd.printf("IP: %d", ip[3]);
-        } else {
-            lcd.setCursor(0, 40);
-            lcd.printf("IP: ??");
-        }
+        // Print heap
+        lcd.fillRect(x, y, 200, lineHeight, TFT_BLACK);
+        lcd.setCursor(x, y);
+        lcd.printf("FH: %d", ESP.getFreeHeap());
+        y += lineHeight; // Move to the next line
+
+        // Print uptime
+        lcd.fillRect(x, y, 200, lineHeight, TFT_BLACK);
+        lcd.setCursor(x, y);
+        lcd.printf("UT: %d", timer.getUptimeSeconds());
+        y += lineHeight; // Move to the next line
 
         // Print time
-        lcd.fillRect(0, 60, 200, 20, TFT_BLACK);
-        lcd.setCursor(0, 60);
-        lcd.printf("TM:");
+        lcd.fillRect(x, y, 200, lineHeight, TFT_BLACK);
+        lcd.setCursor(x, y);
+        struct tm timeInfo;
+        if (getLocalTime(&timeInfo, 1000)) // Wait up to 1 second
+        {
+            char timeString[26];
+            strftime(timeString, sizeof(timeString), "%H:%M:%S", &timeInfo);
+            lcd.printf("TM: %s", timeString);
+        }
+        else
+        {
+            debugE("Failed to get local time.");
+            lcd.printf("TM: ??");
+        }
+        y += lineHeight; // Move to the next line
+
+        // Print IP address
+        lcd.fillRect(x, y, 200, lineHeight, TFT_BLACK);
+        lcd.setCursor(x, y);
+        if (WiFi.status() == WL_CONNECTED)
+        {
+            IPAddress ip = WiFi.localIP();
+            lcd.printf("%d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
+        }
+        else
+        {
+            lcd.printf("??");
+        }
     }
 }
 
