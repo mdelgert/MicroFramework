@@ -25,6 +25,20 @@ void Led::update()
 
 void Led::flash()
 {
+    // Flash the LED every half second
+    if(timer.isHalfSecondElapsed()) {
+        static bool ledState = false;
+        ledState = !ledState;
+
+        if (ledState) {
+            leds[0] = CRGB::Blue;
+        } else {
+            leds[0] = CRGB::Black;
+        }
+        FastLED.show();
+    }
+
+    /*
     if(timer.isOneSecondElapsed()) {
         // Flash the LED every second
         static bool ledState = false; // Track the state of the LED
@@ -37,7 +51,7 @@ void Led::flash()
         }
         FastLED.show();
     }
-    /*
+    
     leds[0] = CRGB::GreenYellow; // Set the first LED to GreenYellow
     FastLED.show();
     delay(500);
