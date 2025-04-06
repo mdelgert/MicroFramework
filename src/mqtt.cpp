@@ -15,27 +15,17 @@ void Mqtt::init()
     esp_client.setCACert(ca_cert);
     mqtt_client.setServer(settings.getMqttServer(), settings.getMqttPort());
     mqtt_client.setKeepAlive(60);
+    //mqtt_client.setSocketTimeout(15);
     mqtt_client.setCallback(mqttCallback);
     connectToMQTT();
 }
 
 void Mqtt::update()
 {
-    // Ensure the MQTT client is connected
     if (mqtt_client.connected())
     {
         mqtt_client.loop();
         return;
-    }
-    else
-    {
-        if (timer.isFifteenSecondsElapsed())
-        {
-            // Reconnect to MQTT every 15 seconds to keep the connection alive
-            debugI("Reconnecting to MQTT broker...\n");
-            connectToMQTT();
-            return;
-        }
     }
 }
 
@@ -52,8 +42,11 @@ void Mqtt::connectToMQTT()
         }
         else
         {
-            debugI("Failed to connect to MQTT broker, rc=%i ", mqtt_client.state());
-            debugI(" Retrying in 15 seconds.");
+            if (timer.isFifteenSecondsElapsed())
+            {
+                debugI("Failed to connect to MQTT broker, rc=%i ", mqtt_client.state());
+                debugI(" Retrying in 15 seconds.");
+            }
         }
     }
 }

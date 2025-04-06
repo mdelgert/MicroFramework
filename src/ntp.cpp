@@ -25,6 +25,7 @@ void Ntp::update() {
     logCurrentTime(timeInfo);
 }
 
+/*
 void Ntp::init() {
     const int syncTimeoutMs = 10000; // 10 seconds timeout
     const char *ntpServer1 = "time.google.com";
@@ -57,8 +58,8 @@ void Ntp::init() {
     long offsetSeconds = isDst ? (-4 * 3600) : (-5 * 3600); // EDT = -4h, EST = -5h
     debugI("Current timezone offset: %ld seconds, DST: %d", offsetSeconds, isDst);
 }
+*/
 
-/*
 void Ntp::init()
 {
     // Set timezone to America/New_York using TZ environment variable
@@ -83,6 +84,5 @@ void Ntp::init()
     debugI("Time synchronized successfully.");
     logCurrentTime(timeInfo);
 }
-*/
 
 #endif // ENABLE_NTP
