@@ -26,19 +26,22 @@ void Ntp::update() {
 }
 
 void Ntp::init() {
-    const char* defaultTimezone = "America/New_York";
+    const int syncTimeoutMs = 10000; // 10 seconds timeout
     const char *ntpServer1 = "time.google.com";
     const char *ntpServer2 = "time.cloudflare.com";
-    const char *ntpServer3 = "pool.ntp.org";
-    const int syncTimeoutMs = 10000; // 10 seconds timeout
+    const char *ntpServer3 = "pool.ntp.org"; //time.nist.gov
+    //const char* defaultTimezone = "America/New_York";
+    
+    //setenv("TZ", defaultTimezone, 1); // 1 means overwrite existing value
+    setenv("TZ", settings.getTimezone(), 1); // 1 means overwrite existing value
 
-    setenv("TZ", defaultTimezone, 1); // 1 means overwrite existing value
     tzset(); // Apply the timezone settings
 
     // Configure NTP servers (no manual offset needed since TZ handles it)
     configTime(0, 0, ntpServer1, ntpServer2, ntpServer3);
 
-    debugI("NTP initialized with timezone America/New_York. Waiting for time sync...");
+    // Log the timezone being set
+    debugI("NTP initialized. Waiting for time sync with timezone: %s", settings.getTimezone());
 
     struct tm timeInfo;
     if (!getLocalTime(&timeInfo, syncTimeoutMs)) {
