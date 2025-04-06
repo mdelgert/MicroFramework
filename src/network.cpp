@@ -17,6 +17,7 @@ void Network::init()
         {
             WiFi.begin(settings.getWifiSSID(), settings.getWifiPassword());
             MDNS.begin(settings.getDeviceName());
+            MDNS.addService("_http", "_tcp", 80);
         }
     }
 }
@@ -37,7 +38,7 @@ bool Network::isConnected()
 {
     // Check WiFi connection status
     if (WiFi.status() == WL_CONNECTED) {
-        debugI("Network is connected: %s", WiFi.localIP().toString().c_str());
+        //debugI("Network is connected: %s", WiFi.localIP().toString().c_str());
         return true;
     } else {
         debugW("Network not connected");

@@ -3,6 +3,8 @@
 
 #if ENABLE_TFT
 
+#include <WiFi.h>
+
 LGFX_LiLyGo_TDongleS3 Tft::lcd;
 
 LGFX_LiLyGo_TDongleS3::LGFX_LiLyGo_TDongleS3()
@@ -57,12 +59,31 @@ void Tft::update()
 {
     if(timer.isOneSecondElapsed()) // Check if 1 second has elapsed
     {
-        lcd.setCursor(5, 5);
-        lcd.fillRect(5, 5, 200, 20, TFT_BLACK);
+        // Heap
+        lcd.setCursor(0, 0);
+        lcd.fillRect(0, 0, 200, 20, TFT_BLACK);
         lcd.printf("FH: %d", ESP.getFreeHeap());
-        lcd.setCursor(5, 25);
-        lcd.fillRect(5, 25, 200, 20, TFT_BLACK);
+
+        lcd.setCursor(0, 20);
+        lcd.fillRect(0, 20, 200, 20, TFT_BLACK);
         lcd.printf("UT: %d", timer.getUptimeSeconds());
+        
+        // Print ip address
+        lcd.fillRect(0, 40, 200, 20, TFT_BLACK);
+        if (WiFi.status() == WL_CONNECTED) {
+            IPAddress ip = WiFi.localIP();
+            lcd.setCursor(0, 40);
+            //lcd.printf("IP: %d.%d.%d.%d", ip[0], ip[1], ip[2], ip[3]);
+            lcd.printf("IP: %d", ip[3]);
+        } else {
+            lcd.setCursor(0, 40);
+            lcd.printf("IP: ??");
+        }
+
+        // Print time
+        lcd.fillRect(0, 60, 200, 20, TFT_BLACK);
+        lcd.setCursor(0, 60);
+        lcd.printf("TM:");
     }
 }
 
