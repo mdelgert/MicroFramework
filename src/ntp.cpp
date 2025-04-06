@@ -5,47 +5,46 @@
 
 #include <time.h>
 
-void Ntp::init()
-{
-    // Set the timezone to America/New_York (UTC-5 with DST adjustment)
-    const long gmtOffsetSec = -5 * 3600; // GMT offset in seconds
-    const int daylightOffsetSec = 3600;  // Daylight Saving Time offset in seconds
-    const char *ntpServer1 = "time.google.com";
-    const char *ntpServer2 = "time.cloudflare.com";
-    const char *ntpServer3 = "pool.ntp.org"; //time.nist.gov
+// Helper function (could also be static or in a namespace)
+void logCurrentTime(const struct tm& timeInfo) {
+    debugI("Current time: %s", asctime(&timeInfo));
+}
 
-    configTime(gmtOffsetSec, daylightOffsetSec, ntpServer1, ntpServer2, ntpServer3);
+// Set the timezone to America/New_York (UTC-5 with DST adjustment)
+void Ntp::init() {
+    const int EST_OFFSET_SECONDS = -5 * 3600;    // UTC-5 hours in seconds
+    const int DST_OFFSET_SECONDS = 3600;         // Daylight Saving Time offset
+    const int SYNC_TIMEOUT_MS = 10000;           // 10 seconds timeout
+    const char* NTP_SERVER1 = "time.cloudflare.com";
+    const char* NTP_SERVER2 = "time.google.com";
+    const char* NTP_SERVER3 = "pool.ntp.org"; //time.nist.gov
+
+    configTime(EST_OFFSET_SECONDS, DST_OFFSET_SECONDS, NTP_SERVER1, NTP_SERVER2, NTP_SERVER3);
     debugI("NTP initialized. Waiting for time sync...");
 
-    // Wait for time to be set
     struct tm timeInfo;
-    if (!getLocalTime(&timeInfo, 10000)) // Wait up to 10 seconds
-    {
-        debugE("Failed to obtain time from NTP servers.");
+    if (!getLocalTime(&timeInfo, SYNC_TIMEOUT_MS)) {
+        debugE("Failed to obtain time from NTP servers after %d ms", SYNC_TIMEOUT_MS);
+        return;
     }
-    else
-    {
-        debugI("Time synchronized successfully.");
-        debugI("Current time: %s", asctime(&timeInfo));
-    }
+
+    debugI("Time synchronized successfully.");
+    logCurrentTime(timeInfo);
 }
 
-void Ntp::update()
-{
-    // Periodically check if the time is synchronized
-    if (timer.isTenMinutesElapsed())
-    {
-        struct tm timeInfo;
-        if (!getLocalTime(&timeInfo))
-        {
-            debugW("Time sync lost. Attempting to resync...");
-            init(); // Reinitialize NTP if time sync is lost
-        }
-        else
-        {
-            debugI("Current time: %s", asctime(&timeInfo));
-        }
+void Ntp::update() {
+    if (!timer.isTenMinutesElapsed()) {
+        return;
     }
+
+    struct tm timeInfo;
+    if (!getLocalTime(&timeInfo)) {
+        debugI("Time sync lost. Attempting to resync...");
+        init();
+        return;
+    }
+
+    logCurrentTime(timeInfo);
 }
 
-#endif
+#endif // ENABLE_NTP

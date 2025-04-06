@@ -72,3 +72,12 @@ void Tft::update()
         }
     }
     */
+
+        // Set the timezone to America/New_York (UTC-5 with DST adjustment)
+    const long gmtOffsetSec = -5 * 3600; // GMT offset in seconds
+    const int daylightOffsetSec = 3600;  // Daylight Saving Time offset in seconds
+    const char *ntpServer1 = "time.google.com";
+    const char *ntpServer2 = "time.cloudflare.com";
+    const char *ntpServer3 = "pool.ntp.org"; //time.nist.gov
+
+    configTime(gmtOffsetSec, daylightOffsetSec, ntpServer1, ntpServer2, ntpServer3);
