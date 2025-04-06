@@ -11,5 +11,10 @@
 #define DEFAULT_WIFI_PASSWORD "password123"
 #define DEFAULT_MQTT_SERVER "mqtt.example.com"
 #define DEFAULT_MQTT_PORT 1883
+#define DEFAULT_MQTT_SSL false
+#define DEFAULT_MQTT_USERNAME "youruser"
+#define DEFAULT_MQTT_PASSWORD "yourpassword"
+#define DEFAULT_MQTT_SUB_TOPIC "microframework/in"
+#define DEFAULT_MQTT_PUB_TOPIC "microframework/out"
 
 #endif // SECRETS_H

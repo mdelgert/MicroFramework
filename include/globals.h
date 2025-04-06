@@ -4,13 +4,13 @@
 
 // Define default secrets
 #ifndef ENABLE_DEFAULT_SECRETS
-#define ENABLE_DEFAULT_SECRETS 1
+#define ENABLE_DEFAULT_SECRETS 0
 #endif
 
 #if ENABLE_DEFAULT_SECRETS
-#include "secrets.default.h"
-#else
 #include "secrets.h"
+#else
+#include "secrets.default.h"
 #endif
 
 // Global classes

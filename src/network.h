@@ -11,6 +11,7 @@ class Network
 public:
     static void init();
     static void update();
+    static bool isConnected();
 private:
 };
 
@@ -21,6 +22,7 @@ class Network
 public:
     static void init() {}
     static void update() {}
+    static bool isConnected() { return false; }
 };
 
 #endif
