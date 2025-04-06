@@ -5,6 +5,7 @@ void setup()
   logger.init();
   settings.init();
   timer.init();
+  network.init();
   // example.init();
   // button.init();
   // led.init();
@@ -15,6 +16,7 @@ void setup()
 void loop()
 {
   timer.update();
+  network.update();
   // example.update();
   // button.update();
   // led.flash();
