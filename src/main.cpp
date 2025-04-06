@@ -9,6 +9,8 @@ void setup()
   button.init();
   led.init();
   tft.init();
+  //tft.printMessage("HELLO:", 5, 5, 20);
+  //tft.printMessage("HELLO:", 5, 25, 20);
 }
 
 void loop()

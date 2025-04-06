@@ -3,7 +3,6 @@
 
 #if ENABLE_TFT
 
-int Tft::counter = 0;
 LGFX_LiLyGo_TDongleS3 Tft::lcd;
 
 LGFX_LiLyGo_TDongleS3::LGFX_LiLyGo_TDongleS3()
@@ -67,11 +66,12 @@ void Tft::update()
     }
 }
 
-void Tft::test()
+void Tft::printMessage(const char* message, int x, int y, int maxLength)
 {
-    lcd.fillScreen(TFT_BLACK); // Clear the screen
-    lcd.setCursor(5, 5);       // Position the cursor
-    lcd.println("HELLO");      // Display the message
+    // Clear the area where the message will be displayed
+    lcd.fillRect(x, y, maxLength * 6, 16, TFT_BLACK); // Assuming 6 pixels per character width and 16 pixels height
+    lcd.setCursor(x, y);
+    lcd.print(message);
 }
 
 #endif

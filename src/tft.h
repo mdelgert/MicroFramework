@@ -23,11 +23,10 @@ class Tft
 public:
     static void init();
     static void update();
-    static void test();
+    static void printMessage(const char* message, int x, int y, int maxLength = 20);
 
 private:
     static LGFX_LiLyGo_TDongleS3 lcd;
-    static int counter;
 };
 
 #else
@@ -37,7 +36,7 @@ class Tft
 public:
     static void init() {}
     static void update() {}
-    static void test() {}
+    static void printMessage(const char* message, int x, int y, int maxLength = 20) {}
 };
 
 #endif
