@@ -11,20 +11,24 @@ void logCurrentTime(const struct tm& timeInfo) {
 }
 
 // Set the timezone to America/New_York (UTC-5 with DST adjustment)
-void Ntp::init() {
-    const int EST_OFFSET_SECONDS = -5 * 3600;    // UTC-5 hours in seconds
-    const int DST_OFFSET_SECONDS = 3600;         // Daylight Saving Time offset
-    const int SYNC_TIMEOUT_MS = 10000;           // 10 seconds timeout
-    const char* NTP_SERVER1 = "time.cloudflare.com";
-    const char* NTP_SERVER2 = "time.google.com";
-    const char* NTP_SERVER3 = "pool.ntp.org"; //time.nist.gov
+void Ntp::init()
+{
+    // Set the timezone to America/New_York (UTC-5 with DST adjustment)
+    const long gmtOffsetSec = -5 * 3600; // GMT offset in seconds
+    const int daylightOffsetSec = 3600;  // Daylight Saving Time offset in seconds
+    const int syncTimeoutMs = 10000; // 10 seconds timeout
+    const char *ntpServer1 = "time.google.com";
+    const char *ntpServer2 = "time.cloudflare.com";
+    const char *ntpServer3 = "pool.ntp.org"; //time.nist.gov
 
-    configTime(EST_OFFSET_SECONDS, DST_OFFSET_SECONDS, NTP_SERVER1, NTP_SERVER2, NTP_SERVER3);
+    configTime(gmtOffsetSec, daylightOffsetSec, ntpServer1, ntpServer2, ntpServer3);
     debugI("NTP initialized. Waiting for time sync...");
 
+    // Wait for time to be set
     struct tm timeInfo;
-    if (!getLocalTime(&timeInfo, SYNC_TIMEOUT_MS)) {
-        debugE("Failed to obtain time from NTP servers after %d ms", SYNC_TIMEOUT_MS);
+    if (!getLocalTime(&timeInfo, syncTimeoutMs))
+    {
+        debugE("Failed to obtain time from NTP servers after %d ms", syncTimeoutMs);
         return;
     }
 
