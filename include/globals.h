@@ -20,6 +20,7 @@
 #include "logger.h"
 #include "mqtt.h"
 #include "network.h"
+#include "ntp.h"
 #include "ota.h"
 #include "settings.h"
 #include "tft.h"

@@ -7,11 +7,10 @@ void setup()
   timer.init();
   network.init();
   ota.init();
+  ntp.init();
   button.init();
   led.init();
   tft.init();
-  //tft.printMessage("HELLO:", 5, 5, 20);
-  //tft.printMessage("HELLO:", 5, 25, 20);
 }
 
 void loop()
@@ -19,6 +18,7 @@ void loop()
   timer.update();
   network.update();
   ota.update();
+  ntp.update();
   button.update();
   tft.update();
 }
