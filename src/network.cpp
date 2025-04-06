@@ -4,6 +4,7 @@
 #if ENABLE_NETWORK
 
 #include <WiFi.h>
+#include <ESPmDNS.h>
 
 void Network::init()
 {
@@ -15,6 +16,7 @@ void Network::init()
         if(timer.isOneSecondElapsed)
         {
             WiFi.begin(settings.getWifiSSID(), settings.getWifiPassword());
+            MDNS.begin(settings.getDeviceName());
         }
     }
 }
