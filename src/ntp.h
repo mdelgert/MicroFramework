@@ -9,8 +9,8 @@
 class Ntp
 {
 public:
-    static void init();
     static void update();
+    static void init();
 
 private:
 };
@@ -20,8 +20,8 @@ private:
 class Ntp
 {
 public:
-    static void init() {}
     static void update() {}
+    static void init() {}
 };
 
 #endif
