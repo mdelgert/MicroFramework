@@ -88,7 +88,7 @@ void Tft::update()
         else
         {
             debugE("Failed to get local time.");
-            lcd.printf("TM: ??");
+            lcd.print("TM: ??");
         }
         y += lineHeight; // Move to the next line
 
