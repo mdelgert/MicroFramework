@@ -72,7 +72,6 @@ void Tft::printHeap()
     size_t freeHeap = esp_get_free_heap_size();
     size_t minFreeHeap = esp_get_minimum_free_heap_size();
     debugI("Tft::printHeap() - Free Heap: %d bytes, Min Free Heap: %d bytes", freeHeap, minFreeHeap);
-    
     lcd.setCursor(5, 30); // Set cursor position for heap info
     lcd.fillRect(5, 30, 200, 20, TFT_BLACK); // Clear previous heap info area
     lcd.printf("Free: %d", freeHeap);

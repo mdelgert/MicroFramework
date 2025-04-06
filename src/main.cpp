@@ -5,7 +5,7 @@ void setup()
   logger.init();
   settings.init();
   timer.init();
-  //network.init();
+  network.init();
   example.init();
   button.init();
   led.init();
@@ -16,8 +16,8 @@ void loop()
 {
   timer.update();
   //network.update();
-  example.update();
+  //example.update();
   button.update();
-  led.flash();
-  tft.update();
+  //led.flash();
+  //tft.update();
 }

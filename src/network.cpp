@@ -10,19 +10,26 @@ void Network::init()
 // Connect to WiFi if not already connected
     if (!isConnected()) {
         debugI("Connecting to WiFi...");
-        WiFi.begin(settings.getWifiSSID(), settings.getWifiPassword());
+        debugI("SSID: %s", settings.getWifiSSID());
+        debugI("Password: %s", settings.getWifiPassword());
+        // Attempt to connect to WiFi
+        WiFi.mode(WIFI_STA); // Set WiFi mode to Station
+        WiFi.disconnect(); // Clear any previous connection
+        if(timer.isOneSecondElapsed)
+        {
+            WiFi.begin(settings.getWifiSSID(), settings.getWifiPassword());
+        }
     }
 }
 
 void Network::update()
 {
-    if (timer.isSixtySecondsElapsed) {
-        // Check WiFi connection status
-        if (!isConnected()) {
-            debugW("Network disconnected, attempting to reconnect...");
-            init(); // Try to reconnect if not connected
-        } else {
-            debugD("Network is connected");
+    // Check if WiFi is connected
+    if(timer.isSixtySecondsElapsed)
+    {
+        if(!isConnected()) {
+            debugW("WiFi not connected, trying to reconnect...");
+            init();
         }
     }
 }
@@ -31,6 +38,7 @@ bool Network::isConnected()
 {
     // Check WiFi connection status
     if (WiFi.status() == WL_CONNECTED) {
+        debugI("Network is connected: %s", WiFi.localIP().toString().c_str());
         return true;
     } else {
         debugW("Network not connected");

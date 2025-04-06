@@ -18,9 +18,9 @@ public:
     static bool isSixtySecondsElapsed();
 
 private:
-    static unsigned long last1Sec;
-    static unsigned long last30Sec;
-    static unsigned long last60Sec;
+    static unsigned long lastOneSec;
+    static unsigned long lastThirtySec;
+    static unsigned long lastSixtySec;
     static bool oneSecondElapsed;
     static bool thirtySecondsElapsed;
     static bool sixtySecondsElapsed;
