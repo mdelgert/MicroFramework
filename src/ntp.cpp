@@ -11,7 +11,7 @@ void logCurrentTime(const struct tm& timeInfo) {
 }
 
 void Ntp::update() {
-    if (!timer.isTenMinutesElapsed()) {
+    if (!timer.isOneHourElapsed()) {
         return;
     }
 

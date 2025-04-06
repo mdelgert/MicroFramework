@@ -14,25 +14,34 @@ public:
     static void init();
     static void update();
     static uint64_t getUptimeSeconds();
+    static bool isHalfSecondElapsed();
     static bool isOneSecondElapsed();
+    static bool isFifteenSecondsElapsed();
     static bool isThirtySecondsElapsed();
     static bool isOneMinuteElapsed();
-    static bool isFiveMinutesElapsed();
-    static bool isTenMinutesElapsed();
-    
+    static bool isFifteenMinutesElapsed();
+    static bool isThirtyMinutesElapsed();
+    static bool isOneHourElapsed();
+
 private:
     static uint64_t uptimeSeconds;
+    static uint32_t lastHalfSec;
     static uint32_t lastOneSec;
+    static uint32_t lastFifteenSec;
     static uint32_t lastThirtySec;
     static uint32_t lastOneMin;
-    static uint32_t lastFiveMin;
-    static uint32_t lastTenMin;
+    static uint32_t lastFifteenMin;
+    static uint32_t lastThirtyMin;
+    static uint32_t lastOneHour;
 
+    static bool halfSecondElapsed;
     static bool oneSecondElapsed;
+    static bool fifteenSecondsElapsed;
     static bool thirtySecondsElapsed;
     static bool oneMinuteElapsed;
-    static bool fiveMinutesElapsed;
-    static bool tenMinutesElapsed;
+    static bool fifteenMinutesElapsed;
+    static bool thirtyMinutesElapsed;
+    static bool oneHourElapsed;
 };
 
 #else
@@ -43,11 +52,14 @@ public:
     static void init() {}
     static void update() {}
     static uint64_t getUptimeSeconds() { return 0; }
+    static bool isHalfSecondElapsed() { return false; }
     static bool isOneSecondElapsed() { return false; }
+    static bool isFifteenSecondsElapsed() { return false; }
     static bool isThirtySecondsElapsed() { return false; }
     static bool isOneMinuteElapsed() { return false; }
-    static bool isFiveMinutesElapsed() { return false; }
-    static bool isTenMinutesElapsed() { return false; }
+    static bool isFifteenMinutesElapsed() { return false; }
+    static bool isThirtyMinutesElapsed() { return false; }
+    static bool isOneHourElapsed() { return false; }
 };
 
 #endif
