@@ -41,8 +41,8 @@ void Mqtt::connectToMQTT()
             if (mqtt_client.connect(settings.getDeviceName(), settings.getMqttUsername(), settings.getMqttPassword()))
             {
                 debugI("Connected to MQTT broker");
-                mqtt_client.subscribe("testtopic/subscribe");
-                mqtt_client.publish("testtopic/publish", "Hello");
+                mqtt_client.subscribe(settings.getMqttSubTopic());
+                mqtt_client.publish(settings.getMqttPubTopic(), "Hello");
             }
             else
             {

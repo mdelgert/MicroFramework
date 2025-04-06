@@ -16,8 +16,8 @@
 #define DEFAULT_MQTT_SSL false
 #define DEFAULT_MQTT_USERNAME "youruser"
 #define DEFAULT_MQTT_PASSWORD "yourpassword"
-#define DEFAULT_MQTT_SUB_TOPIC "microframework/in"
-#define DEFAULT_MQTT_PUB_TOPIC "microframework/out"
+#define DEFAULT_MQTT_SUB_TOPIC "testtopic/sub"
+#define DEFAULT_MQTT_PUB_TOPIC "testtopic/pub"
 
 // Root CA Certificate used by EMQX Public Broker: broker.emqx.io
 static const char ca_cert[] PROGMEM = R"EOF(
