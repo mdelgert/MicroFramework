@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef ENABLE_WIFI
-#define ENABLE_WIFI 1
+#ifndef ENABLE_WIFI_MANAGER
+#define ENABLE_WIFI_MANAGER 1
 #endif
 
-#if ENABLE_WIFI
+#if ENABLE_WIFI_MANAGER
 
-class Wifi
+class WiFiManager
 {
 public:
     static void init();
@@ -18,7 +18,7 @@ private:
 
 #else
 
-class Wifi
+class WiFiManager
 {
 public:
     static void init() {}
