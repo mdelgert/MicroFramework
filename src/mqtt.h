@@ -6,6 +6,8 @@
 
 #if ENABLE_MQTT
 
+#include "globals.h"
+
 class Mqtt
 {
 public:
@@ -13,7 +15,8 @@ public:
     static void update();
 
 private:
-
+    static void connectToMQTT();
+    static void mqttCallback(char *topic, byte *payload, unsigned int length);
 };
 
 #else

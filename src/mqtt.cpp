@@ -1,5 +1,4 @@
 #include "mqtt.h"
-#include "globals.h"
 
 #if ENABLE_MQTT
 
@@ -12,18 +11,65 @@ PubSubClient mqtt_client(esp_client);
 
 void Mqtt::init()
 {
-    // Initialize MQTT client here
-    // For example, set up connection parameters, callbacks, etc.
+    // Set Root CA certificate
+    esp_client.setCACert(ca_cert);
+    mqtt_client.setServer(settings.getMqttServer(), settings.getMqttPort());
+    mqtt_client.setKeepAlive(60);
+    mqtt_client.setCallback(mqttCallback);
+    connectToMQTT();
 }
 
 void Mqtt::update()
 {
-    // Update MQTT client here
-    // For example, handle incoming messages, maintain connection, etc.
-    // This function should be called periodically to keep the MQTT connection alive
+    // Ensure the MQTT client is connected
+    if (mqtt_client.connected())
+    {
+        mqtt_client.loop();
+        return;
+    }
+    else
+    {
+        if (timer.isFifteenSecondsElapsed())
+        {
+            // Reconnect to MQTT every 15 seconds to keep the connection alive
+            debugI("Reconnecting to MQTT broker...\n");
+            connectToMQTT();
+            return;
+        }
+    }
+}
+
+void Mqtt::connectToMQTT()
+{
+    while (!mqtt_client.connected())
+    {
+        debugI("Connecting to MQTT Broker as %s...\n", settings.getDeviceName());
+        if (mqtt_client.connect(settings.getDeviceName(), settings.getMqttUsername(), settings.getMqttPassword()))
+        {
+            debugI("Connected to MQTT broker");
+            mqtt_client.subscribe("testtopic/subscribe");
+            mqtt_client.publish("testtopic/publish", "Hello");
+        }
+        else
+        {
+            debugI("Failed to connect to MQTT broker, rc=%i ", mqtt_client.state());
+            debugI(" Retrying in 15 seconds.");
+        }
+    }
+}
+
+void Mqtt::mqttCallback(char *topic, byte *payload, unsigned int length)
+{
+    debugI("Message received on topic: %s\n", topic);
+    String message;
+    for (unsigned int i = 0; i < length; i++)
+    {
+        message += (char)payload[i];
+    }
+    debugI("Message: %s\n", message.c_str());
 }
 
 #endif
 
-//https://www.emqx.com/en/blog/esp32-connects-to-the-free-public-mqtt-broker
-//https://github.com/emqx/MQTT-Client-Examples/blob/master/mqtt-client-ESP32/esp32_connect_mqtt_via_tls.ino
+// https://www.emqx.com/en/blog/esp32-connects-to-the-free-public-mqtt-broker
+// https://github.com/emqx/MQTT-Client-Examples/blob/master/mqtt-client-ESP32/esp32_connect_mqtt_via_tls.ino
