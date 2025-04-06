@@ -1,12 +1,12 @@
 #pragma once
 
-#ifndef ENABLE_EMPTY
-#define ENABLE_EMPTY 0
+#ifndef ENABLE_WIFI
+#define ENABLE_WIFI 1
 #endif
 
-#if ENABLE_EMPTY
+#if ENABLE_WIFI
 
-class Empty
+class Wifi
 {
 public:
     static void init();
@@ -18,7 +18,7 @@ private:
 
 #else
 
-class Empty
+class Wifi
 {
 public:
     static void init() {}
@@ -26,6 +26,3 @@ public:
 };
 
 #endif
-
-// Global reference
-extern Empty& empty;
