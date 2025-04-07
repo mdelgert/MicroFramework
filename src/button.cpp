@@ -38,8 +38,8 @@ void Button::doubleClick()
 void Button::longPressStart()
 {
     debugI("Button long press start detected");
-    //debugI("Rebooting the device...");
-    //ESP.restart(); // or use NVIC_SystemReset() for more robust reset
+    debugI("Rebooting the device...");
+    ESP.restart(); // or use NVIC_SystemReset() for more robust reset
 }
 
 #endif

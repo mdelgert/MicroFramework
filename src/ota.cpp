@@ -8,6 +8,12 @@
 
 void Ota::init()
 {
+    // Check if WiFi is connected before initializing OTA
+    if (WiFi.status() != WL_CONNECTED) {
+        debugW("WiFi not connected. Skipping OTA initialization.");
+        return;
+    }
+
     // Initialize OTA
     ArduinoOTA.setHostname(settings.getDeviceName());
     ArduinoOTA.setPassword(settings.getDevicePassword());
@@ -47,8 +53,7 @@ void Ota::update()
     if (WiFi.status() == WL_CONNECTED) {
         ArduinoOTA.handle();
     } else {
-       
-        if(timer.isThirtySecondsElapsed()) {
+        if (timer.isThirtySecondsElapsed()) {
             debugW("WiFi not connected, skipping OTA handle");
         }
     }
