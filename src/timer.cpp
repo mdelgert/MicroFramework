@@ -80,7 +80,7 @@ void Timer::update()
     if (oneSecondElapsed)
     {
         uptimeSeconds++;
-        printDebug();
+        //printDebug();
     }
 }
 
@@ -140,8 +140,6 @@ void Timer::printDebug()
     // debugV("Last Thirty Min: %u ms", lastThirtyMin);
     // debugV("Last One Hour: %u ms", lastOneHour);
     // debugV("Uptime Seconds: %llu", uptimeSeconds);
-
-    // Debugging output for uptime, free heap, IP address, and WiFi status
     debugV("Uptime: %llu seconds", uptimeSeconds);
     debugV("Free heap: %d bytes", ESP.getFreeHeap());
     if (WiFi.status() == WL_CONNECTED)
