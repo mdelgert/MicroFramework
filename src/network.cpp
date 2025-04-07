@@ -1,4 +1,3 @@
-/*
 #include "network.h"
 #include "globals.h"
 
@@ -34,4 +33,3 @@ void Network::update()
 }
 
 #endif
-*/

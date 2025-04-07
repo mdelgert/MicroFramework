@@ -5,7 +5,7 @@ void setup()
   logger.init();
   settings.init();
   timer.init();
-  //network.init();
+  network.init();
   //ntp.init();
   //ota.init();
   mqtt.init();
@@ -20,7 +20,7 @@ void setup()
 void loop()
 {
   timer.update();
-  //network.update();
+  network.update();
   //ntp.update();
   //ota.update();
   mqtt.update();
