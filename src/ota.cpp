@@ -1,3 +1,4 @@
+/*
 #include "ota.h"
 #include "globals.h"
 
@@ -55,3 +56,4 @@ void Ota::update()
 }
 
 #endif
+*/

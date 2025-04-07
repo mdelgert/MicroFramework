@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #ifndef ENABLE_OTA
@@ -29,3 +30,4 @@ public:
 
 // Global reference
 extern Ota& ota;
+*/

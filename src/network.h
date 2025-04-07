@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #ifndef ENABLE_NETWORK
@@ -27,3 +28,4 @@ public:
 
 // Global reference
 extern Network& network;
+*/
