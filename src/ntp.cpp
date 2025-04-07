@@ -3,29 +3,13 @@
 
 #if ENABLE_NTP
 
-#include <time.h>
-
-// Helper function (could also be static or in a namespace)
-void logCurrentTime(const struct tm& timeInfo) {
+void Ntp::logCurrentTime(const struct tm& timeInfo) {
     debugI("Current time: %s", asctime(&timeInfo));
 }
 
-void Ntp::update() {
-    if (!timer.isOneHourElapsed()) {
-        return;
-    }
-
-    struct tm timeInfo;
-    if (!getLocalTime(&timeInfo)) {
-        debugI("Time sync lost. Attempting to resync...");
-        init();
-        return;
-    }
-
-    logCurrentTime(timeInfo);
-}
-
 /*
+// This version uses the timezone set in the environment variable TZ
+// It does not appear to be working correctly need to test more.
 void Ntp::init() {
     const int syncTimeoutMs = 10000; // 10 seconds timeout
     const char *ntpServer1 = "time.google.com";
@@ -69,7 +53,7 @@ void Ntp::init()
     const char *ntpServer1 = "time.google.com";
     const char *ntpServer2 = "time.cloudflare.com";
     const char *ntpServer3 = "pool.ntp.org"; //time.nist.gov
-
+    
     configTime(gmtOffsetSec, daylightOffsetSec, ntpServer1, ntpServer2, ntpServer3);
     debugI("NTP initialized. Waiting for time sync...");
 
@@ -82,6 +66,21 @@ void Ntp::init()
     }
 
     debugI("Time synchronized successfully.");
+    logCurrentTime(timeInfo);
+}
+
+void Ntp::update() {
+    if (!timer.isOneHourElapsed()) {
+        return;
+    }
+
+    struct tm timeInfo;
+    if (!getLocalTime(&timeInfo)) {
+        debugI("Time sync lost. Attempting to resync...");
+        init();
+        return;
+    }
+
     logCurrentTime(timeInfo);
 }
 

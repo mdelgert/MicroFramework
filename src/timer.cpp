@@ -2,6 +2,8 @@
 
 #if ENABLE_TIMER
 
+#include <WiFi.h>
+
 // Static member initialization
 uint32_t Timer::lastHalfSec = 0;
 uint32_t Timer::lastOneSec = 0;
@@ -26,7 +28,8 @@ bool Timer::oneHourElapsed = false;
 static bool hasIntervalElapsed(uint32_t &lastTime, uint32_t interval)
 {
     uint32_t currentMillis = millis();
-    if (currentMillis - lastTime >= interval) {
+    if (currentMillis - lastTime >= interval)
+    {
         lastTime = currentMillis;
         return true;
     }
@@ -77,7 +80,7 @@ void Timer::update()
     if (oneSecondElapsed)
     {
         uptimeSeconds++;
-        debugV("Uptime: %llu seconds", uptimeSeconds);
+        printDebug();
     }
 }
 
@@ -124,6 +127,31 @@ bool Timer::isOneHourElapsed()
 uint64_t Timer::getUptimeSeconds()
 {
     return uptimeSeconds;
+}
+
+void Timer::printDebug()
+{
+    // debugV("Last Half Sec: %u ms", lastHalfSec);
+    // debugV("Last One Sec: %u ms", lastOneSec);
+    // debugV("Last Fifteen Sec: %u ms", lastFifteenSec);
+    // debugV("Last Thirty Sec: %u ms", lastThirtySec);
+    // debugV("Last One Min: %u ms", lastOneMin);
+    // debugV("Last Fifteen Min: %u ms", lastFifteenMin);
+    // debugV("Last Thirty Min: %u ms", lastThirtyMin);
+    // debugV("Last One Hour: %u ms", lastOneHour);
+    // debugV("Uptime Seconds: %llu", uptimeSeconds);
+
+    // Debugging output for uptime, free heap, IP address, and WiFi status
+    debugV("Uptime: %llu seconds", uptimeSeconds);
+    debugV("Free heap: %d bytes", ESP.getFreeHeap());
+    if (WiFi.status() == WL_CONNECTED)
+    {
+        debugV("IP Address: %s", WiFi.localIP().toString().c_str());
+    }
+    else
+    {
+        debugV("WiFi Status: Disconnected");
+    }
 }
 
 #endif

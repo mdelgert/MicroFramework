@@ -42,6 +42,7 @@ private:
     static bool fifteenMinutesElapsed;
     static bool thirtyMinutesElapsed;
     static bool oneHourElapsed;
+    static void printDebug();
 };
 
 #else

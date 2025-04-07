@@ -26,13 +26,13 @@ void Button::init()
 void Button::singleClick()
 {
     debugI("Button single click detected");
-    kmd.mouseTest();
+    //kmd.mouseTest();
 }
 
 void Button::doubleClick()
 {
     debugI("Button double click detected");
-    kmd.keyboardTest();
+    //kmd.keyboardTest();
 }
 
 void Button::longPressStart()

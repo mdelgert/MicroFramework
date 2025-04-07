@@ -6,13 +6,16 @@
 
 #if ENABLE_NTP
 
+#include <time.h>
+
 class Ntp
 {
-public:
-    static void update();
-    static void init();
-
 private:
+    static void logCurrentTime(const struct tm &timeInfo);
+
+public:
+    static void init();
+    static void update();
 };
 
 #else
@@ -20,8 +23,8 @@ private:
 class Ntp
 {
 public:
-    static void update() {}
     static void init() {}
+    static void update() {}
 };
 
 #endif
