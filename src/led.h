@@ -17,7 +17,6 @@ public:
     static void init();
     static void flash();
     static void off();
-    static void update();
 
 private:
     static CRGB leds[NUM_LEDS];
@@ -31,7 +30,6 @@ public:
     static void init() {}
     static void flash() {}
     static void off() {}
-    static void update() {}
 };
 
 #endif
