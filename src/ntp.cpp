@@ -1,4 +1,3 @@
-/*
 #include "ntp.h"
 #include "globals.h"
 
@@ -50,9 +49,6 @@ void Ntp::update() {
 }
 
 #endif // ENABLE_NTP
-*/
-
-
 
 /*
 // This version uses the timezone set in the environment variable TZ

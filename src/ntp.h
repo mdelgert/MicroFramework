@@ -1,4 +1,3 @@
-/*
 #pragma once
 
 #ifndef ENABLE_NTP
@@ -32,4 +31,3 @@ public:
 
 // Global reference
 extern Ntp &ntp;
-*/
