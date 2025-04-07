@@ -9,10 +9,32 @@ CRGB Led::leds[NUM_LEDS];
 void Led::init()
 {
     FastLED.addLeds<LED_TYPE, LED_DI_PIN, LED_CI_PIN, COLOR_ORDER>(leds, NUM_LEDS);
-    FastLED.setBrightness(25);
+    FastLED.setBrightness(10);
     leds[0] = CRGB::Black;
     FastLED.show();
     debugI("Led initialized with %d LED(s)", NUM_LEDS);
+}
+
+void Led::flash()
+{
+    // Flash the LED every half second
+    if(timer.isOneSecondElapsed()) {
+        static bool ledState = false;
+        ledState = !ledState;
+
+        if (ledState) {
+            leds[0] = CRGB::GreenYellow;
+        } else {
+            leds[0] = CRGB::Black;
+        }
+        FastLED.show();
+    }
+}
+
+void Led::off()
+{
+    leds[0] = CRGB::Black;
+    FastLED.show();
 }
 
 void Led::update()
@@ -23,20 +45,7 @@ void Led::update()
     debugI("Led update called, but no action taken.");
 }
 
-void Led::flash()
-{
-    // Flash the LED every half second
-    if(timer.isHalfSecondElapsed()) {
-        static bool ledState = false;
-        ledState = !ledState;
-
-        if (ledState) {
-            leds[0] = CRGB::Blue;
-        } else {
-            leds[0] = CRGB::Black;
-        }
-        FastLED.show();
-    }
+#endif
 
     /*
     if(timer.isOneSecondElapsed()) {
@@ -59,12 +68,3 @@ void Led::flash()
     FastLED.show();
     delay(500);
     */
-}
-
-void Led::off()
-{
-    leds[0] = CRGB::Black;
-    FastLED.show();
-}
-
-#endif

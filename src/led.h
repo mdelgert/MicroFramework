@@ -15,9 +15,9 @@ class Led
 {
 public:
     static void init();
-    static void update();
     static void flash();
     static void off();
+    static void update();
 
 private:
     static CRGB leds[NUM_LEDS];
@@ -29,9 +29,9 @@ class Led
 {
 public:
     static void init() {}
-    static void update() {}
     static void flash() {}
     static void off() {}
+    static void update() {}
 };
 
 #endif
