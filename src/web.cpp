@@ -3,6 +3,7 @@
 
 #if ENABLE_WEB
 
+#include <WiFi.h>
 #include <LittleFS.h>
 #include <ArduinoJson.h>
 
@@ -14,6 +15,14 @@ void Web::notFound(AsyncWebServerRequest *request) {
 
 void Web::init()
 {
+    // If wifi is not connected, do not start the web server or will cause infinit reboot loop
+    if (WiFi.status() != WL_CONNECTED) {
+        debugW("WiFi not connected, web server not started.");
+        return;
+    }
+
+    debugI("Starting web server...");
+
     server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
         request->send(200, "text/plain", "{ \"message\": \"Hello, world\" }");
     });

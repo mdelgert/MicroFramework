@@ -13,8 +13,7 @@ void setup()
   led.init();
   tft.init();
   kmd.init();
-  // This will reboot if network is not connected after a timeout
-  //web.init();
+  web.init();
 }
 
 void loop()
