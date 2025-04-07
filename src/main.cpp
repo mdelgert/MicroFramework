@@ -13,6 +13,7 @@ void setup()
   led.init();
   tft.init();
   kmd.init();
+  web.init();
 }
 
 void loop()

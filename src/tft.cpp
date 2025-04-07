@@ -67,32 +67,41 @@ void Tft::update()
         lcd.fillRect(x, y, 200, lineHeight, TFT_BLACK);
         lcd.setCursor(x, y);
         lcd.printf("FH: %d", ESP.getFreeHeap());
-        y += lineHeight; // Move to the next line
-
+        
         // Print uptime
+        y += lineHeight;
         lcd.fillRect(x, y, 200, lineHeight, TFT_BLACK);
         lcd.setCursor(x, y);
         lcd.printf("UT: %d", timer.getUptimeSeconds());
-        y += lineHeight; // Move to the next line
-
+        
         // Print time
+        y += lineHeight;
         lcd.fillRect(x, y, 200, lineHeight, TFT_BLACK);
         lcd.setCursor(x, y);
-        struct tm timeInfo;
-        if (getLocalTime(&timeInfo, 1000)) // Wait up to 1 second
+
+        if(ENABLE_NTP)
         {
-            char timeString[26];
-            strftime(timeString, sizeof(timeString), "%H:%M:%S", &timeInfo);
-            lcd.printf("TM: %s", timeString);
+            // If NTP is enabled, get the time from NTP
+            struct tm timeInfo;
+            if (getLocalTime(&timeInfo, 1000)) // Wait up to 1 second
+            {
+                char timeString[26];
+                strftime(timeString, sizeof(timeString), "%H:%M:%S", &timeInfo);
+                lcd.printf("TM: %s", timeString);
+            }
+            else
+            {
+                debugE("Failed to get NTP time.");
+                lcd.print("TM: ??");
+            }
         }
         else
         {
-            debugE("Failed to get local time.");
-            lcd.print("TM: ??");
+            lcd.print("TM: Off");
         }
-        y += lineHeight; // Move to the next line
 
         // Print IP address
+        y += lineHeight;
         lcd.fillRect(x, y, 200, lineHeight, TFT_BLACK);
         lcd.setCursor(x, y);
         if (WiFi.status() == WL_CONNECTED)

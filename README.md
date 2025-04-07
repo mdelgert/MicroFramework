@@ -28,5 +28,5 @@ This project is a flexible framework for ESP32-based applications. My goal was t
 │   ├── settings.h        # Global settings header
 │   ├── settings.cpp      # Settings implementation
 │   └── secrets.h         # Local secrets (ignored by Git)
-│   └── features/         # Modular feature files (e.g., led.h, led.cpp)
+│   └── feature/          # Modular feature files (e.g., led.h, led.cpp)
 ├── platformio.ini        # PlatformIO configuration

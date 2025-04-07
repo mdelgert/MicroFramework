@@ -31,3 +31,4 @@
 #include "settings.h"
 #include "tft.h"
 #include "timer.h"
+#include "web.h"
