@@ -3,6 +3,8 @@
 void setup()
 {
   logger.init();
+  settings.clear();
+  settings.setDefaults();
   settings.init();
   timer.init();
   network.init();

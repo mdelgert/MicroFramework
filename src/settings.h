@@ -20,6 +20,8 @@ private:
 
 public:
     static void init();
+    static void clear();
+    static void setDefaults();
 
     // Setters
     static void setDeviceName(const char *name);

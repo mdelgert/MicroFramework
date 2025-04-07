@@ -142,3 +142,29 @@ void Settings::setMqttPort(uint16_t port) {
     mqttPort = port;
     prefs.putUShort("mqtt_port", mqttPort);
 }
+
+void Settings::clear() {
+    prefs.clear();
+    prefs.end();
+    debugI("Preferences wiped. Resetting to defaults.");
+    init();
+}
+
+void Settings::setDefaults() {
+    debugI("Setting all preferences to default values...");
+
+    // Set and save each preference to its default value
+    setDeviceName(DEFAULT_DEVICE_NAME);
+    setDevicePassword(DEFAULT_DEVICE_PASSWORD);
+    setTimezone(DEFAULT_TIMEZONE);
+    setWifiSSID(DEFAULT_WIFI_SSID);
+    setWifiPassword(DEFAULT_WIFI_PASSWORD);
+    setMqttServer(DEFAULT_MQTT_SERVER);
+    setMqttUsername(DEFAULT_MQTT_USERNAME);
+    setMqttPassword(DEFAULT_MQTT_PASSWORD);
+    setMqttPubTopic(DEFAULT_MQTT_PUB_TOPIC);
+    setMqttSubTopic(DEFAULT_MQTT_SUB_TOPIC);
+    setMqttPort(DEFAULT_MQTT_PORT);
+
+    debugI("All preferences have been reset to defaults and saved.");
+}
