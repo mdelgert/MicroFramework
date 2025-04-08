@@ -7,7 +7,6 @@ void Ntp::logCurrentTime(const struct tm& timeInfo) {
     debugI("Current time: %s", asctime(&timeInfo));
 }
 
-
 void Ntp::init()
 {
     // Set timezone to America/New_York using TZ environment variable
