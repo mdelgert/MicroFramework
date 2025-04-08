@@ -4,3 +4,7 @@
 ### Test
 GET {{baseUrl}}
 ###
+
+### Get Settings
+GET {{baseUrl}}/settings
+###
