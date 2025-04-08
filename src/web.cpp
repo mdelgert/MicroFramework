@@ -21,12 +21,6 @@ void Web::init()
         return;
     }
 
-    if (!LittleFS.begin(true))
-    {
-        debugE("Failed to mount LittleFS");
-        return;
-    }
-
     debugI("Starting web server...");
     registerSettingsEndpoint();
     registerFileServer();
@@ -66,6 +60,12 @@ void Web::registerSettingsEndpoint()
 
 void Web::registerFileServer()
 {
+    if (!LittleFS.begin(true))
+    {
+        debugE("Failed to mount LittleFS");
+        return;
+    }
+    
     // Serve files from LittleFS at the root path
     server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
     //server.serveStatic("/", LittleFS, "/www").setDefaultFile("index.html");
