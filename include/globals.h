@@ -23,6 +23,7 @@
 #include "button.h"
 #include "kmd.h"
 #include "led.h"
+#include "lfs.h"
 #include "logger.h"
 #include "mqtt.h"
 #include "network.h"

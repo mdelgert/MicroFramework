@@ -6,6 +6,7 @@ void setup()
   // settings.clear();
   // settings.setDefaults();
   settings.init();
+  lfs.init();
   timer.init();
   network.init();
   ntp.init();

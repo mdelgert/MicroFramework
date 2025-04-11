@@ -33,7 +33,6 @@ void Web::init()
 void Web::registerSettingsEndpoint()
 {
     server.on("/settings", HTTP_GET, [](AsyncWebServerRequest *request) {
-        
         JsonDocument doc;
 
         // Populate JSON with settings values
@@ -60,12 +59,6 @@ void Web::registerSettingsEndpoint()
 
 void Web::registerFileServer()
 {
-    if (!LittleFS.begin(true))
-    {
-        debugE("Failed to mount LittleFS");
-        return;
-    }
-    
     // Serve files from LittleFS at the root path
     server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
     //server.serveStatic("/", LittleFS, "/www").setDefaultFile("index.html");

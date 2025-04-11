@@ -41,6 +41,7 @@ void Logger::log(LogLevel level, const char* format, ...) {
 void Logger::output(const char* message) {
 #if ENABLE_LOGGING
     Serial.println(message);
+    //log_i(message);
     // Extend here for TFT, SD, or network logging
 #endif
 }
