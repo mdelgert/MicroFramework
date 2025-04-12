@@ -32,7 +32,7 @@ enum LogLevel : uint8_t
 #endif
 
 #ifndef ENABLE_FILE_LOGGER
-#define ENABLE_FILE_LOGGER 1
+#define ENABLE_FILE_LOGGER 0
 #endif
 
 #ifndef ENABLE_MQTT_LOGGER
