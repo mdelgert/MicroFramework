@@ -21,7 +21,7 @@ void Lfs::init()
 void Lfs::logToFile(const char *message)
 {
     // Do not send messages to logger or will go into infinite loop and crash
-    LittleFS.exists(LOG_FILE);
+    //LittleFS.exists(LOG_FILE);
     File file = LittleFS.open(LOG_FILE, FILE_APPEND);
     if (!file)
     {
