@@ -1,22 +1,25 @@
 #include "logger.h"
+
+#if ENABLE_LOGGING
+
 #include <stdarg.h>
 
-void Logger::init() {
-#if ENABLE_LOGGING
+void Logger::init()
+{
     Serial.begin(115200);
-    delay(1000);  // Optional: wait for Serial stabilization
+    delay(1000); // Optional: wait for Serial stabilization
     debugI("Logger initialized.");
-#endif
 }
 
-void Logger::log(LogLevel level, const char* format, ...) {
-#if ENABLE_LOGGING
-    if (level < LOG_LEVEL) return;
+void Logger::log(LogLevel level, const char *format, ...)
+{
+    if (level < LOG_LEVEL)
+        return;
 
     static char buffer[LOG_BUFFER_SIZE] = {0};
 
     // Get log level prefix
-    const char* prefix = "";
+    const char *prefix = "";
     switch (level) {
         case LOG_LEVEL_VERBOSE: prefix = "[V] "; break;
         case LOG_LEVEL_DEBUG:   prefix = "[D] "; break;
@@ -30,20 +33,24 @@ void Logger::log(LogLevel level, const char* format, ...) {
     va_start(args, format);
     vsnprintf(buffer, sizeof(buffer), format, args);
     va_end(args);
-
     static char finalBuffer[LOG_BUFFER_SIZE] = {0};
     snprintf(finalBuffer, sizeof(finalBuffer), "%s%s", prefix, buffer);
-
     output(finalBuffer);
-#endif
 }
 
-void Logger::output(const char* message) {
-#if ENABLE_LOGGING
+void Logger::output(const char *message)
+{
+#if ENABLE_SERIAL_LOGGING
     Serial.println(message);
-    //log_i(message);
-    // Extend here for TFT, SD, or network logging
-    //mqtt.logMessage("logs/test", message);
 #endif
 
+#if ENABLE_MQTT_LOGGING
+    mqtt.sendMessage("logs/test", message);
+#endif
+
+#if ENABLE_TFT_LOGGING
+    tft.printMessage(message, 0, 0, 128);
+#endif
 }
+
+#endif

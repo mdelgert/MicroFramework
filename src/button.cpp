@@ -38,8 +38,8 @@ void Button::doubleClick()
 void Button::longPressStart()
 {
     debugI("Button long press start detected");
-    debugI("Rebooting the device...");
-    ESP.restart();
+    // debugI("Rebooting the device...");
+    // ESP.restart();
 }
 
 #endif

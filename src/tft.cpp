@@ -118,6 +118,7 @@ void Tft::update()
 
 void Tft::printMessage(const char* message, int x, int y, int maxLength)
 {
+    // Do not write to debug log if tft logging is enabled or will cause infinite loop and crash application
     // Clear the area where the message will be displayed
     lcd.fillRect(x, y, maxLength * 6, 16, TFT_BLACK); // Assuming 6 pixels per character width and 16 pixels height
     lcd.setCursor(x, y);
