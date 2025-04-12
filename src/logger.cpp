@@ -43,10 +43,7 @@ void Logger::output(const char* message) {
     Serial.println(message);
     //log_i(message);
     // Extend here for TFT, SD, or network logging
-
-#ifdef ENABLE_MQTT
     //mqtt.logMessage("logs/test", message);
 #endif
 
-#endif
 }
