@@ -2,11 +2,11 @@
 
 void setup()
 {
+  lfs.init();
   logger.init();
   // settings.clear();
   // settings.setDefaults();
   settings.init();
-  lfs.init();
   timer.init();
   network.init();
   ntp.init();
@@ -17,7 +17,6 @@ void setup()
   tft.init();
   kmd.init();
   web.init();
-  //mqtt.sendMessage("logs/test", "Device started");
 }
 
 void loop()

@@ -45,7 +45,7 @@ void Logger::output(const char *message)
 #endif
 
 #if ENABLE_FILE_LOGGER
-    // Implement file logging if needed
+    lfs.logToFile(message);
 #endif
 
 #if ENABLE_MQTT_LOGGER
