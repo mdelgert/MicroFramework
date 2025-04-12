@@ -67,6 +67,33 @@ void Mqtt::mqttCallback(char *topic, byte *payload, unsigned int length)
     debugI("Message: %s\n", message.c_str());
 }
 
+void Mqtt::sendMessage(const char *topic, const char *message)
+{
+    if (mqtt_client.connected())
+    {
+        if (mqtt_client.publish(topic, message))
+        {
+            debugI("Message published to topic: %s\n", topic);
+        }
+        else
+        {
+            debugI("Failed to publish message to topic: %s\n", topic);
+        }
+    }
+    else
+    {
+        debugI("Cannot send message, MQTT client is not connected.\n");
+    }
+}
+
+void Mqtt::logMessage(const char *topic, const char *message)
+{
+    if (mqtt_client.connected())
+    {
+        mqtt_client.publish(topic, message);
+    }
+}
+
 #endif
 // https://www.emqx.com/en/blog/esp32-connects-to-the-free-public-mqtt-broker
 // https://github.com/emqx/MQTT-Client-Examples/blob/master/mqtt-client-ESP32/esp32_connect_mqtt_via_tls.ino

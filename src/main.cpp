@@ -17,6 +17,7 @@ void setup()
   tft.init();
   kmd.init();
   web.init();
+  //mqtt.sendMessage("logs/test", "Device started");
 }
 
 void loop()

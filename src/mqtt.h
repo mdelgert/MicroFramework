@@ -13,6 +13,8 @@ class Mqtt
 public:
     static void init();
     static void update();
+    static void sendMessage(const char* topic, const char* message);
+    static void logMessage(const char* topic, const char* message);
 
 private:
     static void connectToMQTT();
@@ -26,6 +28,8 @@ class Mqtt
 public:
     static void init() {}
     static void update() {}
+    static void sendMessage(const char* topic, const char* message) {}
+    static void logMessage(const char* topic, const char* message) {}
 };
 
 #endif
