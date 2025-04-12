@@ -1,6 +1,6 @@
 #include "logger.h"
 
-#if ENABLE_LOGGING
+#if ENABLE_LOGGER
 
 #include <stdarg.h>
 
@@ -40,15 +40,19 @@ void Logger::log(LogLevel level, const char *format, ...)
 
 void Logger::output(const char *message)
 {
-#if ENABLE_SERIAL_LOGGING
+#if ENABLE_SERIAL_LOGGER
     Serial.println(message);
 #endif
 
-#if ENABLE_MQTT_LOGGING
+#if ENABLE_FILE_LOGGER
+    // Implement file logging if needed
+#endif
+
+#if ENABLE_MQTT_LOGGER
     mqtt.sendMessage("logs/test", message);
 #endif
 
-#if ENABLE_TFT_LOGGING
+#if ENABLE_TFT_LOGGER
     tft.printMessage(message, 0, 0, 128);
 #endif
 }

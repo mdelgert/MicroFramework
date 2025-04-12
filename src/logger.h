@@ -16,8 +16,8 @@ enum LogLevel : uint8_t
 };
 
 // Logging enable flag (can be overridden in platformio.ini)
-#ifndef ENABLE_LOGGING
-#define ENABLE_LOGGING 1
+#ifndef ENABLE_LOGGER
+#define ENABLE_LOGGER 1
 #endif
 
 // Default log level (overridable via build flags)
@@ -25,18 +25,22 @@ enum LogLevel : uint8_t
 #define LOG_LEVEL LOG_LEVEL_INFO
 #endif
 
-#if ENABLE_LOGGING
+#if ENABLE_LOGGER
 
-#ifndef ENABLE_SERIAL_LOGGING
-#define ENABLE_SERIAL_LOGGING 1
+#ifndef ENABLE_SERIAL_LOGGER
+#define ENABLE_SERIAL_LOGGER 1
 #endif
 
-#ifndef ENABLE_MQTT_LOGGING
-#define ENABLE_MQTT_LOGGING 0
+#ifndef ENABLE_FILE_LOGGER
+#define ENABLE_FILE_LOGGER 0
 #endif
 
-#ifndef ENABLE_TFT_LOGGING
-#define ENABLE_TFT_LOGGING 0
+#ifndef ENABLE_MQTT_LOGGER
+#define ENABLE_MQTT_LOGGER 0
+#endif
+
+#ifndef ENABLE_TFT_LOGGER
+#define ENABLE_TFT_LOGGER 0
 #endif
 
 #define logV(...) Logger::log(LOG_LEVEL_VERBOSE, __VA_ARGS__)
