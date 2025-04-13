@@ -14,6 +14,7 @@ char Settings::mqttPassword[64] = DEFAULT_MQTT_PASSWORD;
 char Settings::mqttPubTopic[64] = DEFAULT_MQTT_PUB_TOPIC;
 char Settings::mqttSubTopic[64] = DEFAULT_MQTT_SUB_TOPIC;
 uint16_t Settings::mqttPort = DEFAULT_MQTT_PORT;
+bool Settings::mqttSSL = DEFAULT_MQTT_SSL;
 
 void Settings::init() {
     prefs.begin("microframework", false);
@@ -60,6 +61,7 @@ void Settings::init() {
         mqttSubTopic[sizeof(mqttSubTopic) - 1] = '\0';
     }
     mqttPort = prefs.getUShort("mqtt_port", DEFAULT_MQTT_PORT);
+    mqttSSL = prefs.getBool("mqtt_ssl", DEFAULT_MQTT_SSL);
 
     debugI("Settings initialized");
 }
@@ -76,6 +78,7 @@ const char* Settings::getMqttPassword() { return mqttPassword; }
 const char* Settings::getMqttPubTopic() { return mqttPubTopic; }
 const char* Settings::getMqttSubTopic() { return mqttSubTopic; }
 uint16_t Settings::getMqttPort() { return mqttPort; }
+bool Settings::getMqttSSL() { return mqttSSL; }
 
 // Setters
 void Settings::setDeviceName(const char* name) {
@@ -143,6 +146,11 @@ void Settings::setMqttPort(uint16_t port) {
     prefs.putUShort("mqtt_port", mqttPort);
 }
 
+void Settings::setMqttSSL(bool ssl) {
+    mqttSSL = ssl;
+    prefs.putBool("mqtt_ssl", mqttSSL);
+}
+
 void Settings::clear() {
     prefs.clear();
     prefs.end();
@@ -165,6 +173,7 @@ void Settings::setDefaults() {
     setMqttPubTopic(DEFAULT_MQTT_PUB_TOPIC);
     setMqttSubTopic(DEFAULT_MQTT_SUB_TOPIC);
     setMqttPort(DEFAULT_MQTT_PORT);
+    setMqttSSL(DEFAULT_MQTT_SSL);
 
     debugI("All preferences have been reset to defaults and saved.");
 }

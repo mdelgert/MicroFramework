@@ -17,6 +17,7 @@ private:
     static char mqttPubTopic[64];
     static char mqttSubTopic[64];
     static uint16_t mqttPort;
+    static bool mqttSSL;
 
 public:
     static void init();
@@ -35,6 +36,7 @@ public:
     static void setMqttPubTopic(const char *topic);
     static void setMqttSubTopic(const char *topic);
     static void setMqttPort(uint16_t port);
+    static void setMqttSSL(bool ssl);
 
     // Getters
     static const char *getDeviceName();
@@ -48,6 +50,7 @@ public:
     static const char *getMqttPubTopic();
     static const char *getMqttSubTopic();
     static uint16_t getMqttPort();
+    static bool getMqttSSL();
 };
 
 // External references for the settings
