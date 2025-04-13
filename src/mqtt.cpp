@@ -2,18 +2,29 @@
 
 #if ENABLE_MQTT
 
-#include <PubSubClient.h>
-#include <WiFiClientSecure.h>
 #include <WiFi.h>
+#include <WiFiClient.h>
+#include <WiFiClientSecure.h>
+#include <PubSubClient.h>
 
 // WiFi and MQTT client initialization
-WiFiClientSecure esp_client;
-PubSubClient mqtt_client(esp_client);
+WiFiClientSecure secure_wifi_client;
+WiFiClient wifi_client;
+PubSubClient mqtt_client(wifi_client);
 
 void Mqtt::init()
 {
-    // Set Root CA certificate
-    esp_client.setCACert(ca_cert);
+    if (settings.getMqttSSL())
+    {
+        secure_wifi_client.setCACert(ca_cert);
+        mqtt_client.setClient(secure_wifi_client); // Use secure client
+    }
+    else
+    {
+        debugI("MQTT SSL is disabled. Using non-secure connection.");
+        mqtt_client.setClient(wifi_client); // Use non-secure client
+    }
+
     mqtt_client.setServer(settings.getMqttServer(), settings.getMqttPort());
     mqtt_client.setKeepAlive(60);
     mqtt_client.setCallback(mqttCallback);
@@ -41,7 +52,11 @@ void Mqtt::connectToMQTT()
             {
                 debugI("Connected to MQTT broker");
                 mqtt_client.subscribe(settings.getMqttSubTopic());
-                mqtt_client.publish(settings.getMqttPubTopic(), "Hello");
+                
+                // Send initial message to indicate connection with the device name but don't use string
+                char initialMessage[64];
+                snprintf(initialMessage, sizeof(initialMessage), "Device %s connected", settings.getDeviceName());
+                mqtt_client.publish(settings.getMqttPubTopic(), initialMessage);
             }
             else
             {
