@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef ENABLE_MQTT
-#define ENABLE_MQTT 1
+#define ENABLE_MQTT 0
 #endif
 
 #if ENABLE_MQTT
