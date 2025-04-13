@@ -1,7 +1,7 @@
 #pragma once
 
 #ifndef ENABLE_EVENTGRID
-#define ENABLE_EVENTGRID 1
+#define ENABLE_EVENTGRID 0
 #endif
 
 #if ENABLE_EVENTGRID
