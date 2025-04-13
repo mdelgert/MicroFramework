@@ -46,17 +46,28 @@ void Mqtt::connectToMQTT()
         // Check if WiFi is connected
         if (WiFi.status() == WL_CONNECTED)
         {
-            // Attempt to connect to the MQTT broker
             debugI("Connecting to MQTT Broker as %s...\n", settings.getDeviceName());
-            if (mqtt_client.connect(settings.getDeviceName(), settings.getMqttUsername(), settings.getMqttPassword()))
+
+            // Check if username and password are set
+            const char *username = settings.getMqttUsername();
+            const char *password = settings.getMqttPassword();
+
+            bool connected;
+            if (strlen(username) > 0 && strlen(password) > 0)
+            {
+                connected = mqtt_client.connect(settings.getDeviceName(), username, password);
+            }
+            else
+            {
+                debugI("No username and password set. Connecting without authentication.");
+                connected = mqtt_client.connect(settings.getDeviceName());
+            }
+
+            if (connected)
             {
                 debugI("Connected to MQTT broker");
                 mqtt_client.subscribe(settings.getMqttSubTopic());
-                
-                // Send initial message to indicate connection with the device name but don't use string
-                char initialMessage[64];
-                snprintf(initialMessage, sizeof(initialMessage), "Device %s connected", settings.getDeviceName());
-                mqtt_client.publish(settings.getMqttPubTopic(), initialMessage);
+                mqtt_client.publish(settings.getMqttPubTopic(), "Hello");
             }
             else
             {
