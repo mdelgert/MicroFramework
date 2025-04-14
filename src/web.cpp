@@ -25,7 +25,6 @@ void Web::init()
     registerSettingsEndpoint();
     registerFileServer();
     registerSecureEndpoint();
-    registerLogout();
     server.onNotFound(notFound);
     server.begin();
     debugI("Web server started.");
@@ -60,9 +59,7 @@ void Web::registerSettingsEndpoint()
 
 void Web::registerFileServer()
 {
-    // Serve files from LittleFS at the root path
     server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
-    //server.serveStatic("/", LittleFS, "/www").setDefaultFile("index.html");
 }
 
 void Web::registerSecureEndpoint()
@@ -75,15 +72,6 @@ void Web::registerSecureEndpoint()
         request->send(200, "text/plain", "Secure endpoint accessed");
     });
 }
-
-void Web::registerLogout()
-{
-    server.on("/logout", HTTP_GET, [](AsyncWebServerRequest *request) {
-        request->requestAuthentication("LogoutRealm"); // Force new realm
-        request->send(401, "text/plain", "Logged out");
-    });
-}
-
 
 #endif
 
