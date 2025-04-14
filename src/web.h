@@ -16,6 +16,7 @@ private:
     static void registerFileServer();
     static void registerSettingsEndpoint();
     static void registerSecureEndpoint();
+    static void registerAuthEndpoints();
 
 public:
     static void init();
