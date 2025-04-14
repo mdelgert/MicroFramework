@@ -13,8 +13,8 @@ class Web
 {
 private:
     static void notFound(AsyncWebServerRequest *request);
-    static void registerSettingsEndpoint();
     static void registerFileServer();
+    static void registerSettingsEndpoint();
     static void registerSecureEndpoint();
 
 public:
