@@ -32,27 +32,28 @@ void Web::init()
         return;
     }
     
-    debugI("Starting web server...");
-
     // digest authentication with hash u: admin p: admin
     digestAuthHash.setUsername("admin");
-    digestAuthHash.setPasswordHash("f499b71f9a36d838b79268e145e132f7"); // MD5(user:realm:pass)
-    digestAuthHash.setRealm("MyApp");
+    digestAuthHash.setPasswordHash("529a66ca1e2c4a9575ddde002b645acd"); // MD5(user:realm:pass)
+    digestAuthHash.setRealm("microframework");
     digestAuthHash.setAuthFailureMessage("Authentication failed");
     digestAuthHash.setAuthType(AsyncAuthType::AUTH_DIGEST);
+
+    debugI("Starting web server.");
 
     registerSettingsEndpoint();
     registerFileServer();
     registerSecureEndpoint();
+
     server.onNotFound(notFound);
     server.begin();
+
     debugI("Web server started.");
 }
 
 void Web::registerSettingsEndpoint()
 {
-    server.on("/settings", HTTP_GET, [](AsyncWebServerRequest *request)
-              {
+    server.on("/settings", HTTP_GET, [](AsyncWebServerRequest *request){
         JsonDocument doc;
 
         // Populate JSON with settings values
@@ -78,11 +79,9 @@ void Web::registerSettingsEndpoint()
 
 void Web::registerSecureEndpoint()
 {
-
-    // digest authentication with hash
-    // curl -v -u admin:admin --digest  http://192.168.4.1/secure
+    // digest authentication with hash curl -v -u admin:admin --digest  http://192.168.4.1/secure
     server.on("/secure", HTTP_GET, [](AsyncWebServerRequest *request)
-              { request->send(200, "text/plain", "Hello, world!"); })
+              { request->send(200, "text/plain", "Secure accessed!"); })
         .addMiddleware(&digestAuthHash);
 }
 

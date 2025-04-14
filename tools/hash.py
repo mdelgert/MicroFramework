@@ -2,8 +2,8 @@ import hashlib
 
 # Input values
 username = "admin"
-realm = "MyApp"
 password = "admin"
+realm = "MyApp"
 
 # Create the input string
 input_string = f"{username}:{realm}:{password}"
