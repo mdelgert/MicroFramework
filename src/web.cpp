@@ -24,7 +24,8 @@ void Web::init()
     debugI("Starting web server...");
     registerSettingsEndpoint();
     registerFileServer();
-    //registerRootEndpoint();
+    registerSecureEndpoint();
+    registerLogout();
     server.onNotFound(notFound);
     server.begin();
     debugI("Web server started.");
@@ -64,12 +65,26 @@ void Web::registerFileServer()
     //server.serveStatic("/", LittleFS, "/www").setDefaultFile("index.html");
 }
 
-/*
-void Web::registerRootEndpoint()
+void Web::registerSecureEndpoint()
 {
-    server.on("/", HTTP_GET, [](AsyncWebServerRequest *request) {
-        request->send(200, "text/plain", "{ \"message\": \"Hello, world\" }");
+    // Implement digest authentication with hash
+    server.on("/secure", HTTP_GET, [](AsyncWebServerRequest *request) {
+        if (!request->authenticate("admin", "password")) {
+            return request->requestAuthentication();
+        }
+        request->send(200, "text/plain", "Secure endpoint accessed");
     });
 }
-*/
+
+void Web::registerLogout()
+{
+    server.on("/logout", HTTP_GET, [](AsyncWebServerRequest *request) {
+        request->requestAuthentication("LogoutRealm"); // Force new realm
+        request->send(401, "text/plain", "Logged out");
+    });
+}
+
+
 #endif
+
+

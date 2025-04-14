@@ -15,7 +15,8 @@ private:
     static void notFound(AsyncWebServerRequest *request);
     static void registerSettingsEndpoint();
     static void registerFileServer();
-    static void registerRootEndpoint();
+    static void registerSecureEndpoint();
+    static void registerLogout();
 
 public:
     static void init();
